@@ -1,10 +1,12 @@
 import { tracked } from "@glimmer/tracking";
 import Controller from "@ember/controller";
 import { action } from "@ember/object";
+import { service } from "@ember/service";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 
 export default class DwpGeneralController extends Controller {
+  @service toasts;
   @tracked saving = false;
   @tracked saved = false;
   @tracked localConfigs = null;
@@ -37,6 +39,7 @@ export default class DwpGeneralController extends Controller {
         data: { configs: payload },
       });
       this.saved = true;
+      this.toasts.success({ data: { message: "General settings saved" }, duration: 2000 });
     } catch (e) {
       popupAjaxError(e);
     } finally {
