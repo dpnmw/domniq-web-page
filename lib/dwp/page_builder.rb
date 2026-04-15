@@ -805,14 +805,30 @@ module DomniqWebPage
 
     def logo_dark_img
       return @logo_dark_img if defined?(@logo_dark_img)
-      dark  = upload("logo_dark")
-      light = upload("logo_light")
-      @logo_dark_img = dark || (light.nil? ? nil : nil)
+      dark = upload("logo_dark")
+      @logo_dark_img = dark || (use_site_logo? ? site_logo_url(:dark) : nil)
     end
 
     def logo_light_img
       return @logo_light_img if defined?(@logo_light_img)
-      @logo_light_img = upload("logo_light")
+      light = upload("logo_light")
+      @logo_light_img = light || (use_site_logo? ? site_logo_url(:light) : nil)
+    end
+
+    def use_site_logo?
+      return @use_site_logo if defined?(@use_site_logo)
+      @use_site_logo = SiteSetting.respond_to?(:domniq_web_use_site_logo) &&
+                        SiteSetting.domniq_web_use_site_logo
+    end
+
+    def site_logo_url(variant)
+      setting = variant == :dark ? :logo_dark : :logo
+      logo = SiteSetting.public_send(setting) rescue nil
+      logo ||= SiteSetting.logo rescue nil
+      return nil if logo.blank?
+      logo.respond_to?(:url) ? UrlHelper.cook_url(logo.url) : nil
+    rescue
+      nil
     end
 
     def has_logo?

@@ -10,6 +10,10 @@ plugins:
   domniq_web_favicon:
     default: ""
     type: upload
+  domniq_web_use_site_logo:
+    default: true
+    type: bool
+
   domniq_web_logo_dark:
     default: ""
     type: upload

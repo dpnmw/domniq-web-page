@@ -59,9 +59,7 @@ export default class DwpSupport extends Component {
     this.checking = true;
     try {
       this.license = await ajax("/admin/plugins/domniq-web-page/license/check.json", { type: "POST" });
-      if (this.license.licensed) {
-        window.location.reload();
-      }
+      window.location.reload();
     } catch {
       this.license = { licensed: false, error: "Check failed" };
     } finally {
@@ -82,6 +80,11 @@ export default class DwpSupport extends Component {
   get statusClass() {
     if (!this.license) return "";
     return this.license.licensed ? "dwp-support__status--active" : "dwp-support__status--inactive";
+  }
+
+  get safeModeUrl() {
+    const base = window.location.origin;
+    return `${base}/?safe_mode=no_plugins`;
   }
 
   iconHtml = (name) => htmlSafe(getIcon(name));
@@ -162,7 +165,7 @@ export default class DwpSupport extends Component {
             <h3 class="dwp-card__heading"><span class="dwp-card__heading-icon">{{this.iconHtml "about"}}</span>Plugin Info</h3>
             <DwpRow @title="Version"><span>2.0.0</span></DwpRow>
             <DwpRow @title="Identifier"><span>domniq-web-page</span></DwpRow>
-            <DwpRow @title="Safe Mode URL"><code>yourforum.com/?safe_mode=no_plugins</code></DwpRow>
+            <DwpRow @title="Safe Mode URL"><code>{{this.safeModeUrl}}</code></DwpRow>
           </div>
         </div>
       </:content>
