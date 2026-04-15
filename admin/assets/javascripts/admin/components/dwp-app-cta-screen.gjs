@@ -22,7 +22,7 @@ export default class DwpAppCtaScreen extends Component {
     <button class="dwp-subscreen__back" type="button" {{on "click" this.c.closeSection}}>← Back to Sections</button>
     <div class="dwp-toggle-row"><span>Enable App CTA</span><DwpField @type="bool" @configKey="show_app_ctas" @value={{this.val "show_app_ctas"}} @onChange={{this.update}} /></div>
 
-    <DwpAccordion @title="Content" @open={{true}} @icon="pen-to-square">
+    <DwpAccordion @title="Content" @open={{true}} @icon="edit">
       <DwpRow @title="Headline" @desc="Main heading for the app download section"><DwpField @type="string" @configKey="app_cta_headline" @value={{this.val "app_cta_headline"}} @onChange={{this.update}} /></DwpRow>
       <DwpRow @title="Subtext" @desc="Supporting text below the headline"><DwpField @type="string" @configKey="app_cta_subtext" @value={{this.val "app_cta_subtext"}} @onChange={{this.update}} /></DwpRow>
       <DwpRow @title="Title Size (px)" @desc="Custom font size for the headline, 0 uses the default"><DwpField @type="integer" @configKey="app_cta_title_size" @value={{this.val "app_cta_title_size"}} @min="0" @max="80" @onChange={{this.update}} /></DwpRow>
@@ -35,7 +35,7 @@ export default class DwpAppCtaScreen extends Component {
       <DwpRow @title="Subtext Colour (Light)" @desc="Subtext in light mode"><DwpField @type="color" @configKey="app_cta_subtext_color_light" @value={{this.val "app_cta_subtext_color_light"}} @onChange={{this.update}} /></DwpRow>
     </DwpAccordion>
 
-    <DwpAccordion @title="App Badges" @icon="mobile-screen">
+    <DwpAccordion @title="App Badges" @icon="mobile">
       <DwpRow @title="iOS App URL" @desc="Full App Store link for your iOS app"><DwpField @type="string" @configKey="ios_app_url" @value={{this.val "ios_app_url"}} @onChange={{this.update}} /></DwpRow>
       <DwpRow @title="Android App URL" @desc="Full Google Play link for your Android app"><DwpField @type="string" @configKey="android_app_url" @value={{this.val "android_app_url"}} @onChange={{this.update}} /></DwpRow>
       <DwpRow @title="Badge Height" @desc="Height of the app store badge buttons in pixels"><DwpField @type="integer" @configKey="app_badge_height" @value={{this.val "app_badge_height"}} @min="30" @max="80" @onChange={{this.update}} /></DwpRow>
@@ -54,7 +54,7 @@ export default class DwpAppCtaScreen extends Component {
       <DwpUploadNote @fieldName="cta_image" />
     </DwpAccordion>
 
-    <DwpAccordion @title="Gradient Background" @icon="fill-drip">
+    <DwpAccordion @title="Gradient Background" @icon="drip">
       <DwpRow @title="Start (Dark)" @desc="First gradient stop in dark mode"><DwpField @type="color" @configKey="app_cta_gradient_start_dark" @value={{this.val "app_cta_gradient_start_dark"}} @onChange={{this.update}} /></DwpRow>
       <DwpRow @title="Start (Light)" @desc="First gradient stop in light mode"><DwpField @type="color" @configKey="app_cta_gradient_start_light" @value={{this.val "app_cta_gradient_start_light"}} @onChange={{this.update}} /></DwpRow>
       <DwpRow @title="Mid (Dark)" @desc="Middle gradient stop in dark mode"><DwpField @type="color" @configKey="app_cta_gradient_mid_dark" @value={{this.val "app_cta_gradient_mid_dark"}} @onChange={{this.update}} /></DwpRow>

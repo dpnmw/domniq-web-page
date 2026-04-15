@@ -19,7 +19,7 @@ export default class DwpAboutScreen extends Component {
     <button class="dwp-subscreen__back" type="button" {{on "click" this.c.closeSection}}>← Back to Sections</button>
     <div class="dwp-toggle-row"><span>Enable About</span><DwpField @type="bool" @configKey="about_enabled" @value={{this.val "about_enabled"}} @onChange={{this.update}} /></div>
 
-    <DwpAccordion @title="Content" @open={{true}} @icon="pen-to-square">
+    <DwpAccordion @title="Content" @open={{true}} @icon="edit">
       <DwpRow @title="Heading Enabled" @desc="Show the section heading above the about card"><DwpField @type="bool" @configKey="about_heading_enabled" @value={{this.val "about_heading_enabled"}} @onChange={{this.update}} /></DwpRow>
       <DwpRow @title="Heading" @desc="Section heading text"><DwpField @type="string" @configKey="about_heading" @value={{this.val "about_heading"}} @onChange={{this.update}} /></DwpRow>
       <DwpRow @title="Community Name" @desc="Author name shown below the quote"><DwpField @type="string" @configKey="about_title" @value={{this.val "about_title"}} @onChange={{this.update}} /></DwpRow>

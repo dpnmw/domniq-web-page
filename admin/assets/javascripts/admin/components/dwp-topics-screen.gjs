@@ -18,7 +18,7 @@ export default class DwpTopicsScreen extends Component {
     <button class="dwp-subscreen__back" type="button" {{on "click" this.c.closeSection}}>← Back to Sections</button>
     <div class="dwp-toggle-row"><span>Enable Topics</span><DwpField @type="bool" @configKey="topics_enabled" @value={{this.val "topics_enabled"}} @onChange={{this.update}} /></div>
 
-    <DwpAccordion @title="Content" @open={{true}} @icon="pen-to-square">
+    <DwpAccordion @title="Content" @open={{true}} @icon="edit">
       <DwpRow @title="Title Enabled" @desc="Show or hide the section heading"><DwpField @type="bool" @configKey="topics_title_enabled" @value={{this.val "topics_title_enabled"}} @onChange={{this.update}} /></DwpRow>
       <DwpRow @title="Title" @desc="Heading text above the topic cards"><DwpField @type="string" @configKey="topics_title" @value={{this.val "topics_title"}} @onChange={{this.update}} /></DwpRow>
       <DwpRow @title="Title Size (px)" @desc="Custom font size, 0 uses the default"><DwpField @type="integer" @configKey="topics_title_size" @value={{this.val "topics_title_size"}} @min="0" @max="80" @onChange={{this.update}} /></DwpRow>

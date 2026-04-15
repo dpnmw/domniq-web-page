@@ -29,7 +29,7 @@ export default class DwpStatsScreen extends Component {
       <DwpRow @title="Title Size (px)" @desc="Custom font size, 0 uses the default"><DwpField @type="integer" @configKey="stats_title_size" @value={{this.val "stats_title_size"}} @min="0" @max="80" @onChange={{this.update}} /></DwpRow>
     </DwpAccordion>
 
-    <DwpAccordion @title="Card Style" @icon="table-cells">
+    <DwpAccordion @title="Card Style" @icon="grid">
       <DwpRow @title="Card Style" @desc="Visual shape of each stat card">
         <div class="dwp-tile-grid">
           {{#each this.cardStyles as |style|}}

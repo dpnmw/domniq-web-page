@@ -24,7 +24,7 @@ export default class DwpLeaderboardScreen extends Component {
       <DwpRow @title="Title Size (px)" @desc="Custom font size, 0 uses the default"><DwpField @type="integer" @configKey="leaderboard_title_size" @value={{this.val "leaderboard_title_size"}} @min="0" @max="80" @onChange={{this.update}} /></DwpRow>
     </DwpAccordion>
 
-    <DwpAccordion @title="Content" @icon="pen-to-square">
+    <DwpAccordion @title="Content" @icon="edit">
       <DwpRow @title="Bio Max Length" @desc="Maximum characters shown from each user's bio"><DwpField @type="integer" @configKey="leaderboard_bio_max_length" @value={{this.val "leaderboard_bio_max_length"}} @min="50" @max="500" @onChange={{this.update}} /></DwpRow>
       <DwpRow @title="Topics Label" @desc="Label for the topics stat on each card"><DwpField @type="string" @configKey="leaderboard_topics_label" @value={{this.val "leaderboard_topics_label"}} @onChange={{this.update}} /></DwpRow>
       <DwpRow @title="Posts Label" @desc="Label for the posts stat on each card"><DwpField @type="string" @configKey="leaderboard_posts_label" @value={{this.val "leaderboard_posts_label"}} @onChange={{this.update}} /></DwpRow>

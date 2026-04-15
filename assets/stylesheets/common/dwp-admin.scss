@@ -536,8 +536,9 @@
   background: linear-gradient(135deg, rgba(var(--tertiary-rgb), 0.15), rgba(var(--tertiary-rgb), 0.05));
   flex-shrink: 0;
 
-  i {
-    font-size: 0.7rem;
+  svg {
+    width: 15px;
+    height: 15px;
     color: var(--tertiary);
   }
 }
@@ -554,8 +555,9 @@
   flex-shrink: 0;
   transition: background 0.15s, border-color 0.15s;
 
-  i {
-    font-size: 0.7rem;
+  svg {
+    width: 14px;
+    height: 14px;
     color: var(--primary-medium);
     transition: color 0.15s;
   }
@@ -564,7 +566,7 @@
     background: rgba(239, 68, 68, 0.08);
     border-color: rgba(239, 68, 68, 0.25);
 
-    i {
+    svg {
       color: #ef4444;
     }
   }

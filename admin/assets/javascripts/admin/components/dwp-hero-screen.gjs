@@ -31,7 +31,7 @@ export default class DwpHeroScreen extends Component {
   <template>
     <button class="dwp-subscreen__back" type="button" {{on "click" this.c.closeSection}}>← Back to Sections</button>
 
-    <DwpAccordion @title="Content" @open={{true}} @icon="pen-to-square">
+    <DwpAccordion @title="Content" @open={{true}} @icon="edit">
       <DwpRow @title="Hero Title"><DwpField @type="string" @configKey="hero_title" @value={{this.val "hero_title"}} @onChange={{this.update}} /></DwpRow>
       <DwpRow @title="Accent Word Enabled"><DwpField @type="bool" @configKey="hero_accent_enabled" @value={{this.val "hero_accent_enabled"}} @onChange={{this.update}} /></DwpRow>
       {{#if this.showAccentWord}}
@@ -87,7 +87,7 @@ export default class DwpHeroScreen extends Component {
       <DwpRow @title="Max Height (vh)"><DwpField @type="integer" @configKey="hero_image_max_height" @value={{this.val "hero_image_max_height"}} @min="10" @max="100" @onChange={{this.update}} /></DwpRow>
     </DwpAccordion>
 
-    <DwpAccordion @title="Buttons" @icon="hand-pointer">
+    <DwpAccordion @title="Buttons" @icon="pointer">
       <DwpRow @title="Button Shadows"><DwpField @type="bool" @configKey="hero_buttons_shadow" @value={{this.val "hero_buttons_shadow"}} @onChange={{this.update}} /></DwpRow>
       <h4 class="dwp-subgroup-label">Primary Button</h4>
       <DwpRow @title="Enabled"><DwpField @type="bool" @configKey="hero_primary_button_enabled" @value={{this.val "hero_primary_button_enabled"}} @onChange={{this.update}} /></DwpRow>

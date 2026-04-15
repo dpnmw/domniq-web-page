@@ -2,6 +2,8 @@ import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 import { action } from "@ember/object";
 import { on } from "@ember/modifier";
+import { htmlSafe } from "@ember/template";
+import { getIcon } from "./dwp-icons";
 
 export default class DwpAccordion extends Component {
   @tracked isOpen = this.args.open ?? false;
@@ -11,22 +13,25 @@ export default class DwpAccordion extends Component {
     this.isOpen = !this.isOpen;
   }
 
+  get iconHtml() {
+    if (!this.args.icon) return null;
+    return htmlSafe(getIcon(this.args.icon));
+  }
+
+  get toggleHtml() {
+    return htmlSafe(this.isOpen ? getIcon("xmark") : getIcon("plus"));
+  }
+
   <template>
     <div class="dwp-accordion {{if this.isOpen 'dwp-accordion--open'}}">
       <button class="dwp-accordion__header" type="button" {{on "click" this.toggle}}>
         <span class="dwp-accordion__title">
-          {{#if @icon}}
-            <span class="dwp-accordion__icon"><i class="fa-solid fa-{{@icon}}"></i></span>
+          {{#if this.iconHtml}}
+            <span class="dwp-accordion__icon">{{this.iconHtml}}</span>
           {{/if}}
           {{@title}}
         </span>
-        <span class="dwp-accordion__toggle">
-          {{#if this.isOpen}}
-            <i class="fa-solid fa-xmark"></i>
-          {{else}}
-            <i class="fa-solid fa-plus"></i>
-          {{/if}}
-        </span>
+        <span class="dwp-accordion__toggle">{{this.toggleHtml}}</span>
       </button>
       {{#if this.isOpen}}
         <div class="dwp-accordion__body {{if @dimmed 'dwp-accordion__body--dimmed'}}">

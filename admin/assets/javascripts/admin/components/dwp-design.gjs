@@ -75,7 +75,7 @@ export default class DwpDesign extends Component {
           <DwpUploadNote @fieldName="logo_dark, logo_light, footer_logo" />
         </DwpAccordion>
 
-        <DwpAccordion @title="Animations & Effects" @icon="wand-magic-sparkles">
+        <DwpAccordion @title="Animations & Effects" @icon="sparkle">
           <DwpRow @title="Scroll Animation" @desc="Animation style for sections entering viewport">
             <div class="dwp-tile-grid">
               {{#each this.animTiles as |tile|}}
