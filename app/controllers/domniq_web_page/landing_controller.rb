@@ -12,8 +12,11 @@ module DomniqWebPage
     def index
       return redirect_to "/login" unless safe_to_render?
 
+      nonce = SecureRandom.base64(16)
+      ContentSecurityPolicy::Middleware.set_nonce(request, nonce) rescue nil
+
       config = DomniqWebPage::ConfigBuilder.build
-      html   = DomniqWebPage::PageBuilder.new(config).build
+      html   = DomniqWebPage::PageBuilder.new(config, nonce: nonce).build
 
       render html: html.html_safe, layout: false, content_type: "text/html"
 
