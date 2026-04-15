@@ -75,7 +75,7 @@ export default class DwpGeneral extends Component {
           </div>
         </div>
 
-        <div class="dwp-card dwp-card--features {{if this.controller.isLocked 'dwp-card--locked'}}">
+        <div class="dwp-card dwp-card--features">
           <div class="dwp-card__body">
             <h3 class="dwp-card__heading"><span class="dwp-card__heading-icon">{{this.iconHtml "bolt"}}</span>Icons</h3>
             <DwpRow @title="Icon Library" @desc="Choose an icon set for buttons, titles, and stat labels">
@@ -96,7 +96,6 @@ export default class DwpGeneral extends Component {
               </div>
             </div>
           </div>
-          {{#if this.controller.isLocked}}<DwpLicenseLock />{{/if}}
         </div>
 
         <div class="dwp-card dwp-card--support {{if this.controller.isLocked 'dwp-card--locked'}}">

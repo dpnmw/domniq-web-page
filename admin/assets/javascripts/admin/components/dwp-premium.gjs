@@ -252,7 +252,7 @@ export default class DwpPremium extends Component {
                 </div>
                 <div class="dwp-premium-pricing__feature">
                   <span class="dwp-premium-pricing__check dwp-premium-pricing__check--blue">&#10003;</span>
-                  <span>Custom CSS injection &amp; icon library access</span>
+                  <span>Custom CSS injection for advanced styling</span>
                 </div>
               </div>
             </div>

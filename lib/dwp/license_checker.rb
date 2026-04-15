@@ -108,7 +108,7 @@ module DomniqWebPage
         preloader_enabled preloader_min_duration preloader_bar_color
         preloader_bg_dark preloader_bg_light preloader_text_color_dark preloader_text_color_light
       ],
-      "general" => %w[icon_library custom_css],
+      "general" => %w[custom_css],
       "navbar" => %w[
         navbar_bg_color navbar_border_style navbar_text_color_dark navbar_text_color_light
         navbar_icon_color_dark navbar_icon_color_light
