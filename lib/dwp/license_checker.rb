@@ -158,25 +158,23 @@ module DomniqWebPage
     def self.remote_check(domain, key)
       response = Excon.post(
         REMOTE_URL,
-        body: { license_key: key, domain: domain }.to_json,
+        body: { license_key: key, domain: domain, product: "domniq-web-page" }.to_json,
         headers: { "Content-Type" => "application/json" },
         connect_timeout: 5,
         read_timeout: 5,
       )
 
-      if response.status == 200
-        data = JSON.parse(response.body)
-        {
-          "license_active" => data["active"] == true,
-          "domain" => domain,
-          "email" => data["email"],
-          "paid_at" => data["paid_at"],
-          "expires_at" => data["expires_at"],
-          "checked_at" => Time.now.iso8601,
-        }
-      else
-        fallback_result(domain)
-      end
+      data = JSON.parse(response.body)
+      result = {
+        "license_active" => data["active"] == true,
+        "domain" => domain,
+        "email" => data["email"],
+        "paid_at" => data["paid_at"],
+        "expires_at" => data["expires_at"],
+        "error" => data["error"],
+        "checked_at" => Time.now.iso8601,
+      }
+      result
     rescue Excon::Error, JSON::ParserError, StandardError => e
       Rails.logger.warn("[DomniqWebPage] License check failed: #{e.message}")
       fallback_result(domain)

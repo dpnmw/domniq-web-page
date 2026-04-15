@@ -37,7 +37,7 @@ module DomniqWebPage
     private
 
     def license_json(result)
-      {
+      json = {
         licensed: result["license_active"] == true,
         domain: result["domain"],
         email: result["email"],
@@ -46,6 +46,8 @@ module DomniqWebPage
         last_checked: result["checked_at"],
         license_key: DomniqWebPage::LicenseChecker.license_key_masked,
       }
+      json[:error] = result["error"] if result["error"].present?
+      json
     end
   end
 end
