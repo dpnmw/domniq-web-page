@@ -4,7 +4,7 @@ module Jobs
   class DwpHeartbeat < ::Jobs::Scheduled
     every 1.week
 
-    TELEMETRY_URL = "https://api.dpnmediaworks.com/telemetry/heartbeat"
+    TELEMETRY_URL = "https://api.dpnmediaworks.com/api/telemetry/heartbeat"
 
     def execute(args)
       return unless SiteSetting.domniq_web_enabled
