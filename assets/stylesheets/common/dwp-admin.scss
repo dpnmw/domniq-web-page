@@ -1150,9 +1150,30 @@
   border-top: 1px solid var(--primary-very-low);
 }
 
+.dwp-support__key-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
 .dwp-support__key-input {
   font-family: "SFMono-Regular", Consolas, monospace;
   letter-spacing: 0.03em;
+
+  &--error {
+    border-color: var(--danger) !important;
+  }
+}
+
+.dwp-support__hint {
+  font-size: 0.72rem;
+  color: var(--primary-medium);
+  line-height: 1.4;
+
+  &--error {
+    color: var(--danger);
+    font-weight: 600;
+  }
 }
 
 .dwp-support__key-display {

@@ -1,6 +1,7 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 import { action } from "@ember/object";
+import { service } from "@ember/service";
 import { on } from "@ember/modifier";
 import { htmlSafe } from "@ember/template";
 import { ajax } from "discourse/lib/ajax";
@@ -10,10 +11,12 @@ import DwpRow from "./dwp-row";
 import { getIcon } from "./dwp-icons";
 
 export default class DwpSupport extends Component {
+  @service toasts;
   @tracked license = null;
   @tracked licenseKey = "";
   @tracked checking = false;
   @tracked activating = false;
+  @tracked licenseError = null;
 
   constructor() {
     super(...arguments);
@@ -31,12 +34,14 @@ export default class DwpSupport extends Component {
   @action
   updateLicenseKey(event) {
     this.licenseKey = event.target.value;
+    this.licenseError = null;
   }
 
   @action
   async activateLicense() {
     if (!this.licenseKey.trim()) return;
     this.activating = true;
+    this.licenseError = null;
     try {
       const result = await ajax("/admin/plugins/domniq-web-page/license/activate.json", {
         type: "POST",
@@ -45,10 +50,13 @@ export default class DwpSupport extends Component {
       this.license = result;
       if (result.licensed) {
         this.licenseKey = "";
+        this.toasts.success({ data: { message: "Licence activated successfully" }, duration: 3000 });
         window.location.reload();
       }
     } catch (e) {
-      popupAjaxError(e);
+      const msg = e.jqXHR?.responseJSON?.error || "Activation failed. Please check your licence key.";
+      this.licenseError = msg;
+      this.toasts.error({ data: { message: msg }, duration: 5000 });
     } finally {
       this.activating = false;
     }
@@ -57,11 +65,20 @@ export default class DwpSupport extends Component {
   @action
   async checkLicense() {
     this.checking = true;
+    this.licenseError = null;
     try {
       this.license = await ajax("/admin/plugins/domniq-web-page/license/check.json", { type: "POST" });
-      window.location.reload();
+      if (this.license.licensed) {
+        this.toasts.success({ data: { message: "Licence is valid and active" }, duration: 3000 });
+      } else {
+        const msg = this.license.error || "Licence is inactive.";
+        this.licenseError = msg;
+        this.toasts.error({ data: { message: msg }, duration: 5000 });
+      }
     } catch {
-      this.license = { licensed: false, error: "Check failed" };
+      this.licenseError = "Unable to verify licence. Please try again later.";
+      this.toasts.error({ data: { message: this.licenseError }, duration: 5000 });
+      this.license = { licensed: false };
     } finally {
       this.checking = false;
     }
@@ -135,13 +152,20 @@ export default class DwpSupport extends Component {
               {{/if}}
             {{else}}
               <DwpRow @title="Licence Key" @desc="Enter your licence key from DPN Media Works">
-                <input
-                  type="text"
-                  value={{this.licenseKey}}
-                  {{on "input" this.updateLicenseKey}}
-                  placeholder="XXXX-XXXX-XXXX-XXXX"
-                  class="dwp-field__input dwp-support__key-input"
-                />
+                <div class="dwp-support__key-wrapper">
+                  <input
+                    type="text"
+                    value={{this.licenseKey}}
+                    {{on "input" this.updateLicenseKey}}
+                    placeholder="e.g. a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6"
+                    class="dwp-field__input dwp-support__key-input {{if this.licenseError 'dwp-support__key-input--error'}}"
+                  />
+                  {{#if this.licenseError}}
+                    <span class="dwp-support__hint dwp-support__hint--error">{{this.licenseError}}</span>
+                  {{else}}
+                    <span class="dwp-support__hint">Enter your licence key and click Activate, or click Check Licence to verify an existing key.</span>
+                  {{/if}}
+                </div>
               </DwpRow>
             {{/if}}
 
