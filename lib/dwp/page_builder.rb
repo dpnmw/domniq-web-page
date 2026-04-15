@@ -19,10 +19,9 @@ module DomniqWebPage
       "app_cta"     => :render_app_cta,
     }.freeze
 
-    def initialize(config, nonce: nil)
-      @c      = config
-      @nonce  = nonce
-      @data   = DataFetcher.fetch(config)
+    def initialize(config)
+      @c = config
+      @data = DataFetcher.fetch(config)
       @styles = StyleBuilder.new(config)
     end
 
@@ -49,8 +48,7 @@ module DomniqWebPage
       html << render_footer
       html << render_video_modal
       html << render_designer_badge
-      nonce_attr = @nonce ? " nonce=\"#{@nonce}\"" : ""
-      html << "<script#{nonce_attr}>\n#{js}\n</script>\n"
+      html << "<script>\n#{js}\n</script>\n"
       html << "</body>\n</html>"
       html
     end
@@ -167,8 +165,7 @@ module DomniqWebPage
       html << "    <div class=\"dw-preloader__counter\" id=\"dw-preloader-pct\">0%</div>\n"
       html << "    <div class=\"dw-preloader__bar\"><div class=\"dw-preloader__bar-fill\" id=\"dw-preloader-bar\"></div></div>\n"
       html << "  </div>\n</div>\n"
-      nonce_attr = @nonce ? " nonce=\"#{@nonce}\"" : ""
-      html << "<script#{nonce_attr}>\n(function() {\n"
+      html << "<script>\n(function() {\n"
       html << "  var el = document.getElementById('dw-preloader');\n"
       html << "  var pct = document.getElementById('dw-preloader-pct');\n"
       html << "  var bar = document.getElementById('dw-preloader-bar');\n"

@@ -12,11 +12,20 @@ module DomniqWebPage
     def index
       return redirect_to "/login" unless safe_to_render?
 
-      nonce = SecureRandom.base64(16)
-      ContentSecurityPolicy::Middleware.set_nonce(request, nonce) rescue nil
-
+      base_url = Discourse.base_url
       config = DomniqWebPage::ConfigBuilder.build
-      html   = DomniqWebPage::PageBuilder.new(config, nonce: nonce).build
+      html   = DomniqWebPage::PageBuilder.new(config).build
+
+      csp = "default-src 'self' #{base_url}; " \
+            "script-src 'self' 'unsafe-inline'; " \
+            "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; " \
+            "style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; " \
+            "img-src 'self' #{base_url} data: https:; " \
+            "font-src 'self' #{base_url} https://fonts.gstatic.com https://cdnjs.cloudflare.com; " \
+            "connect-src 'self' #{base_url}; " \
+            "frame-src https://www.youtube.com https://www.youtube-nocookie.com; " \
+            "frame-ancestors 'self'"
+      response.headers["Content-Security-Policy"] = csp
 
       render html: html.html_safe, layout: false, content_type: "text/html"
 
