@@ -6,6 +6,7 @@ import DwpRow from "./dwp-row";
 import DwpField from "./dwp-field";
 import DwpUploadNote from "./dwp-upload-note";
 import DwpSaveBar from "./dwp-save-bar";
+import DwpSortOrder from "./dwp-sort-order";
 
 export default class DwpGeneral extends Component {
   get controller() { return this.args.controller; }
@@ -27,8 +28,8 @@ export default class DwpGeneral extends Component {
             <DwpRow @title="Plugin Enabled" @desc="Master switch — also accessible in the Settings tab">
               <a href="/admin/plugins/domniq-web-page" class="btn btn-default btn-small">Open Settings</a>
             </DwpRow>
-            <DwpRow @title="Section Order" @desc="Order of sections on the landing page (pipe-separated)">
-              <DwpField @type="string" @configKey="section_order" @value={{this.val "section_order"}} @onChange={{this.update}} />
+            <DwpRow @title="Section Order" @desc="Drag sections to reorder how they appear on the landing page">
+              <DwpSortOrder @value={{this.val "section_order"}} @configKey="section_order" @onChange={{this.update}} />
             </DwpRow>
           </div>
         </div>
