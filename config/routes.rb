@@ -20,6 +20,7 @@ Discourse::Application.routes.draw do
       put  "/configs/:config_type" => "domniq_web_page/admin_configs#bulk_update"
       get  "/license/status"       => "domniq_web_page/admin_license#status"
       post "/license/check"        => "domniq_web_page/admin_license#check"
+      post "/admin/pin-upload"     => "domniq_web_page/admin_uploads#pin_upload"
     end
   end
 end

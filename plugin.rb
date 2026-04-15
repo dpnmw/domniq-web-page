@@ -14,6 +14,24 @@ add_admin_route "dwp.admin.title", "domniq-web-page", use_new_show_route: true
 
 require_relative "lib/dwp"
 
+UPLOAD_SETTINGS = %w[
+  domniq_web_og_image domniq_web_favicon domniq_web_logo_dark domniq_web_logo_light
+  domniq_web_footer_logo domniq_web_hero_bg_image domniq_web_hero_image
+  domniq_web_about_image domniq_web_about_bg_image domniq_web_faq_image
+  domniq_web_cta_image domniq_web_ios_badge_image domniq_web_android_badge_image
+  domniq_web_preloader_logo_dark domniq_web_preloader_logo_light
+].freeze
+
+register_upload_in_use do |upload|
+  UPLOAD_SETTINGS.any? do |setting_name|
+    begin
+      SiteSetting.public_send(setting_name)&.id == upload.id
+    rescue
+      false
+    end
+  end
+end
+
 after_initialize do
   require_relative "lib/dwp/helpers"
   require_relative "lib/dwp/icons"
