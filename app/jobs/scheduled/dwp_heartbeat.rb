@@ -14,11 +14,10 @@ module Jobs
         site_url: Discourse.base_url,
         plugin: "domniq-web-page",
         plugin_version: plugin_version,
-        discourse_version: Discourse::VERSION::STRING,
+        platform: "discourse",
+        platform_version: Discourse::VERSION::STRING,
         license_key: license_key,
         licensed: DomniqWebPage::LicenseChecker.licensed?,
-        total_users: User.real.count,
-        active_users_30d: User.real.where("last_seen_at > ?", 30.days.ago).count,
       }
 
       begin
