@@ -16,9 +16,9 @@ module DomniqWebPage
       type = params[:config_type]
       raise Discourse::NotFound unless allowed_types.include?(type)
 
-      # Server-side license enforcement — reject writes to locked config types/keys
+      # Server-side license enforcement — reject writes to fully locked config types
       if defined?(DomniqWebPage::LicenseChecker)
-        if DomniqWebPage::LicenseChecker.config_locked?(type)
+        if DomniqWebPage::LicenseChecker.section_fully_locked?(type)
           render json: { errors: ["This section requires a valid licence."] }, status: :forbidden
           return
         end

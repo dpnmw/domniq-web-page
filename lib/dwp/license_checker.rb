@@ -52,7 +52,7 @@ module DomniqWebPage
 
       result = remote_check(domain, key)
       store_result(result)
-      send_heartbeat(result) if SiteSetting.respond_to?(:domniq_web_telemetry_enabled) && SiteSetting.domniq_web_telemetry_enabled
+      send_heartbeat(result) if force && SiteSetting.respond_to?(:domniq_web_telemetry_enabled) && SiteSetting.domniq_web_telemetry_enabled
       result
     end
 
@@ -119,6 +119,11 @@ module DomniqWebPage
         footer_text_color_dark footer_text_color_light
       ],
     }.freeze
+
+    def self.section_fully_locked?(config_type)
+      return false if licensed?
+      LOCKED_SECTION_TYPES.include?(config_type)
+    end
 
     def self.config_locked?(config_type, config_key = nil)
       return false if licensed?
