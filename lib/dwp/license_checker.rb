@@ -47,6 +47,7 @@ module DomniqWebPage
           "checked_at" => Time.now.iso8601,
         }
         store_result(result)
+        send_heartbeat(result) if force && SiteSetting.respond_to?(:domniq_web_telemetry_enabled) && SiteSetting.domniq_web_telemetry_enabled
         return result
       end
 
