@@ -1,4 +1,4 @@
-import DwpSupport from "discourse/plugins/domniq-web-page/admin/components/dwp-support";
+import DwpPremium from "discourse/plugins/domniq-web-page/admin/components/dwp-premium";
 <template>
-  <DwpSupport @model={{@model}} @controller={{@controller}} />
+  <DwpPremium @model={{@model}} @controller={{@controller}} />
 </template>

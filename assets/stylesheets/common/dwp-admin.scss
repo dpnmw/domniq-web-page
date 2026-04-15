@@ -1254,6 +1254,224 @@
   }
 }
 
+// ── Premium Pricing ──
+
+.dwp-premium-pricing {
+  position: relative;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+  padding: 2.5rem;
+  margin-bottom: 1.25rem;
+  overflow: hidden;
+  color: #f8fafc;
+}
+
+.dwp-premium-pricing__glow {
+  position: absolute;
+  top: -60%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.dwp-premium-pricing__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.dwp-premium-pricing__header {
+  margin-bottom: 1.75rem;
+}
+
+.dwp-premium-pricing__title {
+  margin: 0 0 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #818cf8, #c084fc, #f472b6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.dwp-premium-pricing__subtitle {
+  margin: 0;
+  font-size: 0.88rem;
+  color: #94a3b8;
+  line-height: 1.6;
+  max-width: 500px;
+}
+
+.dwp-premium-pricing__platforms {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.dwp-premium-pricing__platform {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #94a3b8;
+}
+
+.dwp-premium-pricing__platform-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &--desktop { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+  &--mobile { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+  &--pwa { background: linear-gradient(135deg, #06b6d4, #0891b2); }
+}
+
+.dwp-premium-pricing__price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.15rem;
+  margin-bottom: 1.75rem;
+}
+
+.dwp-premium-pricing__currency {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #818cf8;
+}
+
+.dwp-premium-pricing__amount {
+  font-size: 3.5rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  background: linear-gradient(135deg, #e2e8f0, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.dwp-premium-pricing__period {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #64748b;
+}
+
+.dwp-premium-pricing__features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 2rem;
+  margin-bottom: 1.75rem;
+  text-align: left;
+  width: 100%;
+  max-width: 640px;
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.dwp-premium-pricing__feature-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.dwp-premium-pricing__feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: #cbd5e1;
+}
+
+.dwp-premium-pricing__check {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: white;
+  margin-top: 1px;
+
+  &--blue { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+  &--teal { background: linear-gradient(135deg, #14b8a6, #0d9488); }
+  &--purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+  &--orange { background: linear-gradient(135deg, #f59e0b, #d97706); }
+  &--pink { background: linear-gradient(135deg, #ec4899, #db2777); }
+  &--gold { background: linear-gradient(135deg, #d4a24e, #b8860b); }
+}
+
+.dwp-premium-pricing__free-note {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 10px;
+  background: rgba(34, 197, 94, 0.08);
+  border: 1px solid rgba(34, 197, 94, 0.15);
+  margin-bottom: 1.75rem;
+  font-size: 0.78rem;
+  color: #86efac;
+  line-height: 1.45;
+  max-width: 640px;
+}
+
+.dwp-premium-pricing__free-badge {
+  flex-shrink: 0;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  background: rgba(34, 197, 94, 0.15);
+  color: #4ade80;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.dwp-premium-pricing__cta {
+  display: inline-flex;
+  padding: 0.85rem 2.5rem;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #818cf8, #6366f1);
+  color: white !important;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.2s;
+  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 28px rgba(99, 102, 241, 0.45);
+    background: linear-gradient(135deg, #a5b4fc, #818cf8);
+  }
+}
+
+.dwp-premium-pricing__note {
+  margin: 0.75rem 0 0;
+  font-size: 0.7rem;
+  color: #475569;
+}
+
 // ── Licence Lock Overlay ──
 
 .dwp-license-lock {

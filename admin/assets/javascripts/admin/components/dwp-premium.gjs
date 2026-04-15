@@ -10,7 +10,7 @@ import DwpPageLayout from "./dwp-page-layout";
 import DwpRow from "./dwp-row";
 import { getIcon } from "./dwp-icons";
 
-export default class DwpSupport extends Component {
+export default class DwpPremium extends Component {
   @service toasts;
   @tracked license = null;
   @tracked licenseKey = "";
@@ -181,6 +181,94 @@ export default class DwpSupport extends Component {
             </div>
           </div>
         </div>
+
+        {{#unless this.isLicensed}}
+        <div class="dwp-premium-pricing">
+          <div class="dwp-premium-pricing__glow"></div>
+          <div class="dwp-premium-pricing__content">
+            <div class="dwp-premium-pricing__header">
+              <h2 class="dwp-premium-pricing__title">Unlock the Full Experience</h2>
+              <p class="dwp-premium-pricing__subtitle">Transform your Discourse into a stunning, branded destination — works beautifully on desktop and mobile browsers with full PWA support.</p>
+            </div>
+
+            <div class="dwp-premium-pricing__platforms">
+              <div class="dwp-premium-pricing__platform">
+                <div class="dwp-premium-pricing__platform-icon dwp-premium-pricing__platform-icon--desktop">
+                  <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="white" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                </div>
+                <span>Desktop</span>
+              </div>
+              <div class="dwp-premium-pricing__platform">
+                <div class="dwp-premium-pricing__platform-icon dwp-premium-pricing__platform-icon--mobile">
+                  <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="white" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+                </div>
+                <span>Mobile</span>
+              </div>
+              <div class="dwp-premium-pricing__platform">
+                <div class="dwp-premium-pricing__platform-icon dwp-premium-pricing__platform-icon--pwa">
+                  <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="white" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                </div>
+                <span>PWA</span>
+              </div>
+            </div>
+
+            <div class="dwp-premium-pricing__price">
+              <span class="dwp-premium-pricing__currency">$</span>
+              <span class="dwp-premium-pricing__amount">100</span>
+              <span class="dwp-premium-pricing__period">/year</span>
+            </div>
+
+            <div class="dwp-premium-pricing__features">
+              <div class="dwp-premium-pricing__feature-col">
+                <div class="dwp-premium-pricing__feature">
+                  <span class="dwp-premium-pricing__check dwp-premium-pricing__check--blue">&#10003;</span>
+                  <span>6 extra landing page sections — Stats, About, Leaderboard, Topics, FAQ &amp; App CTA</span>
+                </div>
+                <div class="dwp-premium-pricing__feature">
+                  <span class="dwp-premium-pricing__check dwp-premium-pricing__check--teal">&#10003;</span>
+                  <span>Hero video backgrounds, overlays &amp; contributor showcase</span>
+                </div>
+                <div class="dwp-premium-pricing__feature">
+                  <span class="dwp-premium-pricing__check dwp-premium-pricing__check--purple">&#10003;</span>
+                  <span>Scroll animations, parallax effects &amp; staggered reveals</span>
+                </div>
+                <div class="dwp-premium-pricing__feature">
+                  <span class="dwp-premium-pricing__check dwp-premium-pricing__check--orange">&#10003;</span>
+                  <span>Custom preloader with brand colors</span>
+                </div>
+              </div>
+              <div class="dwp-premium-pricing__feature-col">
+                <div class="dwp-premium-pricing__feature">
+                  <span class="dwp-premium-pricing__check dwp-premium-pricing__check--pink">&#10003;</span>
+                  <span>Google Fonts &amp; custom typography</span>
+                </div>
+                <div class="dwp-premium-pricing__feature">
+                  <span class="dwp-premium-pricing__check dwp-premium-pricing__check--gold">&#10003;</span>
+                  <span>Full navbar &amp; footer color theming</span>
+                </div>
+                <div class="dwp-premium-pricing__feature">
+                  <span class="dwp-premium-pricing__check dwp-premium-pricing__check--teal">&#10003;</span>
+                  <span>Social media links integration</span>
+                </div>
+                <div class="dwp-premium-pricing__feature">
+                  <span class="dwp-premium-pricing__check dwp-premium-pricing__check--blue">&#10003;</span>
+                  <span>Custom CSS injection &amp; icon library access</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="dwp-premium-pricing__free-note">
+              <span class="dwp-premium-pricing__free-badge">Free Forever</span>
+              <span>Core features — hero section, navbar, footer, design basics &amp; PWA access — are free to use with no limits.</span>
+            </div>
+
+            <a href="https://api.dpnmediaworks.com/pay/discourse/domniq-web-page" target="_blank" rel="noopener noreferrer" class="dwp-premium-pricing__cta">
+              Upgrade to Premium
+            </a>
+            <p class="dwp-premium-pricing__note">Annual subscription. Billed yearly. Cancel anytime.</p>
+          </div>
+        </div>
+        {{/unless}}
 
         <div class="dwp-card dwp-card--community">
           <div class="dwp-card__body">
