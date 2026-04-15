@@ -7,6 +7,8 @@ import DwpField from "./dwp-field";
 import DwpUploadNote from "./dwp-upload-note";
 import DwpSaveBar from "./dwp-save-bar";
 import DwpSortOrder from "./dwp-sort-order";
+import { htmlSafe } from "@ember/template";
+import { getIcon } from "./dwp-icons";
 
 export default class DwpGeneral extends Component {
   get controller() { return this.args.controller; }
@@ -14,6 +16,8 @@ export default class DwpGeneral extends Component {
   val = (key) => this.controller.getValue(key);
 
   update = (key, value) => this.controller.updateValue(key, value);
+
+  iconHtml = (name) => htmlSafe(getIcon(name));
 
   <template>
     <DwpPageLayout @titleLabel="dwp.admin.general_title" @descriptionLabel="dwp.admin.general_description">
@@ -24,7 +28,7 @@ export default class DwpGeneral extends Component {
 
         <div class="dwp-card dwp-card--settings">
           <div class="dwp-card__body">
-            <h3 class="dwp-card__heading">Plugin Status</h3>
+            <h3 class="dwp-card__heading"><span class="dwp-card__heading-icon">{{this.iconHtml "toggle"}}</span>Plugin Status</h3>
             <DwpRow @title="Plugin Enabled" @desc="Master switch — also accessible in the Settings tab">
               <a href="/admin/plugins/domniq-web-page" class="btn btn-default btn-small">Open Settings</a>
             </DwpRow>
@@ -36,7 +40,7 @@ export default class DwpGeneral extends Component {
 
         <div class="dwp-card dwp-card--community">
           <div class="dwp-card__body">
-            <h3 class="dwp-card__heading">SEO & Meta</h3>
+            <h3 class="dwp-card__heading"><span class="dwp-card__heading-icon">{{this.iconHtml "search"}}</span>SEO & Meta</h3>
             <DwpRow @title="Meta Description" @desc="Description for search engines">
               <DwpField @type="text_area" @configKey="meta_description" @value={{this.val "meta_description"}} @onChange={{this.update}} />
             </DwpRow>
@@ -49,7 +53,7 @@ export default class DwpGeneral extends Component {
 
         <div class="dwp-card dwp-card--features">
           <div class="dwp-card__body">
-            <h3 class="dwp-card__heading">Icons</h3>
+            <h3 class="dwp-card__heading"><span class="dwp-card__heading-icon">{{this.iconHtml "bolt"}}</span>Icons</h3>
             <DwpRow @title="Icon Library" @desc="Choose an icon set for buttons, titles, and stat labels">
               <DwpField @type="enum" @configKey="icon_library" @value={{this.val "icon_library"}} @choices={{this.iconChoices}} @onChange={{this.update}} />
             </DwpRow>
@@ -72,7 +76,7 @@ export default class DwpGeneral extends Component {
 
         <div class="dwp-card dwp-card--support">
           <div class="dwp-card__body">
-            <h3 class="dwp-card__heading">Custom CSS</h3>
+            <h3 class="dwp-card__heading"><span class="dwp-card__heading-icon">{{this.iconHtml "code"}}</span>Custom CSS</h3>
             <textarea class="dwp-field__input dwp-field__textarea dwp-field__textarea--mono dwp-field__textarea--full" {{on "input" this.handleCssInput}}>{{this.val "custom_css"}}</textarea>
           </div>
         </div>

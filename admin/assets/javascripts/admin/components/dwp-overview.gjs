@@ -1,22 +1,24 @@
 import Component from "@glimmer/component";
-import DPageSubheader from "discourse/components/d-page-subheader";
-import { i18n } from "discourse-i18n";
+import { htmlSafe } from "@ember/template";
 import DwpPageLayout from "./dwp-page-layout";
+import { getIcon } from "./dwp-icons";
 
 const FEATURES = [
-  { title: "Hero", desc: "Title, subtitle, buttons, background image, video, and contributor pills.", color: "--blue" },
-  { title: "Stats", desc: "Live member count, topics, posts, likes, and chats with animated counters.", color: "--teal" },
-  { title: "About", desc: "Community description with image, quote marks, and author card.", color: "--orange" },
-  { title: "Leaderboard", desc: "Top contributors with bios, stats, and avatars.", color: "--pink" },
-  { title: "Topics", desc: "Trending discussions with category badges and engagement stats.", color: "--purple" },
-  { title: "FAQ", desc: "Accordion Q&A with optional showcase image.", color: "--gold" },
-  { title: "App CTA", desc: "App download section with iOS/Android badges and gradient background.", color: "--blue" },
-  { title: "Navbar", desc: "Logo, theme toggle, social icons, sign in and join buttons.", color: "--teal" },
-  { title: "Footer", desc: "Links, description, copyright, and optional logo.", color: "--orange" },
+  { title: "Hero", desc: "Title, subtitle, buttons, background image, video, and contributor pills.", color: "--blue", icon: "hero" },
+  { title: "Stats", desc: "Live member count, topics, posts, likes, and chats with animated counters.", color: "--teal", icon: "stats" },
+  { title: "About", desc: "Community description with image, quote marks, and author card.", color: "--orange", icon: "about" },
+  { title: "Leaderboard", desc: "Top contributors with bios, stats, and avatars.", color: "--pink", icon: "leaderboard" },
+  { title: "Topics", desc: "Trending discussions with category badges and engagement stats.", color: "--purple", icon: "topics" },
+  { title: "FAQ", desc: "Accordion Q&A with optional showcase image.", color: "--gold", icon: "faq" },
+  { title: "App CTA", desc: "App download section with iOS/Android badges and gradient background.", color: "--blue", icon: "appcta" },
+  { title: "Navbar", desc: "Logo, theme toggle, social icons, sign in and join buttons.", color: "--teal", icon: "navbar" },
+  { title: "Footer", desc: "Links, description, copyright, and optional logo.", color: "--orange", icon: "footer" },
 ];
 
 export default class DwpOverview extends Component {
   features = FEATURES;
+
+  iconFor = (name) => htmlSafe(getIcon(name));
 
   <template>
     <DwpPageLayout @titleLabel="dwp.admin.overview_title" @descriptionLabel="dwp.admin.overview_description">
@@ -33,7 +35,7 @@ export default class DwpOverview extends Component {
           {{#each this.features as |feature|}}
             <div class="dwp-overview__feature">
               <div class="dwp-overview__feature-icon dwp-overview__feature-icon{{feature.color}}">
-                <svg viewBox="0 -960 960 960" width="22" height="22" fill="white"><path d="M480-80q-82 0-155-31.5t-127.5-86Q143-252 111.5-325T80-480q0-83 31.5-155.5t86-127Q252-817 325-848.5T480-880q83 0 155.5 31.5t127 86q54.5 54.5 86 127T880-480q0 82-31.5 155t-86 127.5q-54.5 54.5-127 86T480-80Z"/></svg>
+                {{this.iconFor feature.icon}}
               </div>
               <h3 class="dwp-overview__feature-title">{{feature.title}}</h3>
               <p class="dwp-overview__feature-desc">{{feature.desc}}</p>

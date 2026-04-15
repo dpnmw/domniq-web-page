@@ -2,8 +2,11 @@ import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 import { action } from "@ember/object";
 import { on } from "@ember/modifier";
+import { htmlSafe } from "@ember/template";
 import { ajax } from "discourse/lib/ajax";
 import DwpPageLayout from "./dwp-page-layout";
+import DwpRow from "./dwp-row";
+import { getIcon } from "./dwp-icons";
 
 export default class DwpSupport extends Component {
   @tracked license = null;
@@ -45,6 +48,8 @@ export default class DwpSupport extends Component {
     return this.license.licensed ? "dwp-support__status--active" : "dwp-support__status--inactive";
   }
 
+  iconHtml = (name) => htmlSafe(getIcon(name));
+
   <template>
     <DwpPageLayout @titleLabel="dwp.admin.support_title" @descriptionLabel="dwp.admin.support_description">
       <:icon>
@@ -53,7 +58,7 @@ export default class DwpSupport extends Component {
       <:content>
         <div class="dwp-card dwp-card--settings">
           <div class="dwp-card__body">
-            <h3 class="dwp-card__heading">Licence Status</h3>
+            <h3 class="dwp-card__heading"><span class="dwp-card__heading-icon">{{this.iconHtml "toggle"}}</span>Licence Status</h3>
             <div class="dwp-support__row">
               <span class="dwp-support__status {{this.statusClass}}">{{this.statusLabel}}</span>
               {{#if this.license.license_key}}
@@ -71,18 +76,27 @@ export default class DwpSupport extends Component {
 
         <div class="dwp-card dwp-card--community">
           <div class="dwp-card__body">
-            <h3 class="dwp-card__heading">Documentation</h3>
+            <h3 class="dwp-card__heading"><span class="dwp-card__heading-icon">{{this.iconHtml "list"}}</span>Documentation</h3>
             <div class="dwp-support__links">
-              <a href="https://domniq.app" target="_blank" rel="noopener noreferrer">Getting Started</a>
-              <a href="https://domniq.app" target="_blank" rel="noopener noreferrer">Settings Reference</a>
-              <a href="https://domniq.app" target="_blank" rel="noopener noreferrer">Changelog</a>
+              <a href="https://domniq.app" target="_blank" rel="noopener noreferrer" class="dwp-support__link">
+                <span>Getting Started</span>
+                <span class="dwp-support__arrow">&rarr;</span>
+              </a>
+              <a href="https://domniq.app" target="_blank" rel="noopener noreferrer" class="dwp-support__link">
+                <span>Settings Reference</span>
+                <span class="dwp-support__arrow">&rarr;</span>
+              </a>
+              <a href="https://domniq.app" target="_blank" rel="noopener noreferrer" class="dwp-support__link">
+                <span>Changelog</span>
+                <span class="dwp-support__arrow">&rarr;</span>
+              </a>
             </div>
           </div>
         </div>
 
         <div class="dwp-card dwp-card--support">
           <div class="dwp-card__body">
-            <h3 class="dwp-card__heading">Plugin Info</h3>
+            <h3 class="dwp-card__heading"><span class="dwp-card__heading-icon">{{this.iconHtml "about"}}</span>Plugin Info</h3>
             <DwpRow @title="Version"><span>2.0.0</span></DwpRow>
             <DwpRow @title="Identifier"><span>domniq-web-page</span></DwpRow>
             <DwpRow @title="Safe Mode URL"><code>yourforum.com/?safe_mode=no_plugins</code></DwpRow>
@@ -92,5 +106,3 @@ export default class DwpSupport extends Component {
     </DwpPageLayout>
   </template>
 }
-
-import DwpRow from "./dwp-row";
