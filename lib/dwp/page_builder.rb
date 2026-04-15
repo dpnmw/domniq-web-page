@@ -48,6 +48,7 @@ module DomniqWebPage
       html << render_footer
       html << render_video_modal
       html << render_designer_badge
+      html << render_theme_sounds
       html << "<script>\n#{js}\n</script>\n"
       html << "</body>\n</html>"
       html
@@ -757,6 +758,18 @@ module DomniqWebPage
       "  </div>\n" \
       "  <img class=\"dw-designer-badge__logo\" src=\"data:image/png;base64,#{logo_b64}\" alt=\"Designer\">\n" \
       "</div>\n"
+    end
+
+    def render_theme_sounds
+      sound_dir = File.join(DomniqWebPage::PLUGIN_DIR, "assets", "sounds")
+      on_b64  = Base64.strict_encode64(File.binread(File.join(sound_dir, "switch-on.mp3"))) rescue nil
+      off_b64 = Base64.strict_encode64(File.binread(File.join(sound_dir, "switch-off.mp3"))) rescue nil
+      return "" unless on_b64 && off_b64
+
+      "<script>" \
+      "window.__dwSoundOn=\"data:audio/mpeg;base64,#{on_b64}\";" \
+      "window.__dwSoundOff=\"data:audio/mpeg;base64,#{off_b64}\";" \
+      "</script>\n"
     end
 
     def render_social_icons
