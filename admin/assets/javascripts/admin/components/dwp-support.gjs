@@ -87,6 +87,24 @@ export default class DwpSupport extends Component {
     return `${base}/?safe_mode=no_plugins`;
   }
 
+  get telemetryEnabled() {
+    return this.license?.telemetry_enabled ?? true;
+  }
+
+  @action
+  async toggleTelemetry() {
+    const newValue = !this.telemetryEnabled;
+    try {
+      await ajax("/admin/plugins/domniq-web-page/license/telemetry.json", {
+        type: "PUT",
+        data: { telemetry_enabled: newValue },
+      });
+      this.license = { ...this.license, telemetry_enabled: newValue };
+    } catch (e) {
+      popupAjaxError(e);
+    }
+  }
+
   iconHtml = (name) => htmlSafe(getIcon(name));
 
   <template>
@@ -137,6 +155,20 @@ export default class DwpSupport extends Component {
                 {{if this.checking "Checking..." "Check Licence"}}
               </button>
             </div>
+          </div>
+        </div>
+
+        <div class="dwp-card dwp-card--community">
+          <div class="dwp-card__body">
+            <h3 class="dwp-card__heading"><span class="dwp-card__heading-icon">{{this.iconHtml "stats"}}</span>Install Telemetry</h3>
+            <p class="dwp-card__desc">Anonymous usage data sent weekly to DPN Media Works for licence verification and support.</p>
+
+            <DwpRow @title="Send Anonymous Install Data" @desc="Shares your site URL, plugin version, and enabled features with DPN Media Works. No user data is collected.">
+              <label class="dwp-toggle">
+                <input type="checkbox" checked={{this.telemetryEnabled}} {{on "change" this.toggleTelemetry}} />
+                <span class="dwp-toggle__track"></span>
+              </label>
+            </DwpRow>
           </div>
         </div>
 

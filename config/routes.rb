@@ -21,6 +21,7 @@ Discourse::Application.routes.draw do
       get  "/license/status"       => "domniq_web_page/admin_license#status"
       post "/license/activate"    => "domniq_web_page/admin_license#activate"
       post "/license/check"        => "domniq_web_page/admin_license#check"
+      put  "/license/telemetry"    => "domniq_web_page/admin_license#update_telemetry"
       post "/admin/pin-upload"     => "domniq_web_page/admin_uploads#pin_upload"
       get  "/landing-css"          => "domniq_web_page/admin#landing_css"
     end

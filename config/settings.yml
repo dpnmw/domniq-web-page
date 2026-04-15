@@ -14,6 +14,10 @@ plugins:
     default: true
     type: bool
 
+  domniq_web_telemetry_enabled:
+    default: true
+    type: bool
+
   domniq_web_logo_dark:
     default: ""
     type: upload

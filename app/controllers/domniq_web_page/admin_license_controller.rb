@@ -6,7 +6,9 @@ module DomniqWebPage
 
     def status
       result = DomniqWebPage::LicenseChecker.check
-      render json: license_json(result)
+      render json: license_json(result).merge(
+        telemetry_enabled: SiteSetting.domniq_web_telemetry_enabled,
+      )
     end
 
     def activate
@@ -24,6 +26,12 @@ module DomniqWebPage
     def check
       result = DomniqWebPage::LicenseChecker.check(force: true)
       render json: license_json(result)
+    end
+
+    def update_telemetry
+      SiteSetting.domniq_web_telemetry_enabled =
+        ActiveModel::Type::Boolean.new.cast(params[:telemetry_enabled])
+      render json: success_json
     end
 
     private
