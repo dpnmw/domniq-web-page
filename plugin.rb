@@ -15,6 +15,9 @@ add_admin_route "dwp.admin.title", "domniq-web-page", use_new_show_route: true
 require_relative "lib/dwp"
 
 after_initialize do
+  require_relative "lib/dwp/helpers"
+  require_relative "lib/dwp/icons"
+  require_relative "lib/dwp/data_fetcher"
   require_relative "lib/dwp/config_builder"
   require_relative "lib/dwp/style_builder"
   require_relative "lib/dwp/page_builder"

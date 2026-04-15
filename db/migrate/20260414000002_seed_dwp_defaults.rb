@@ -229,14 +229,13 @@ class SeedDwpDefaults < ActiveRecord::Migration[7.0]
   }.freeze
 
   def up
+    now = Time.current.iso8601
     DEFAULTS.each do |(config_type, config_key), default_value|
-      DomniqWebPage::Config.find_or_create_by(
-        config_type: config_type,
-        config_key: config_key
-      ) do |c|
-        c.config_value = default_value.to_s
-        c.enabled = true
-      end
+      execute <<~SQL
+        INSERT INTO dwp_configs (config_type, config_key, config_value, position, enabled, created_at, updated_at)
+        VALUES (#{quote(config_type)}, #{quote(config_key)}, #{quote(default_value.to_s)}, 0, TRUE, #{quote(now)}, #{quote(now)})
+        ON CONFLICT (config_type, config_key) DO NOTHING
+      SQL
     end
   end
 
