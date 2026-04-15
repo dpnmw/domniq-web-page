@@ -401,7 +401,7 @@ module DomniqWebPage
     # ── STATS ──
 
     def render_stats
-      return "" unless cfg("stats", "stats_enabled") != false
+      return "" unless cfg("stats", "stats_enabled")
 
       stats       = @data[:stats]
       stats_title = cfg("stats", "stats_title").to_s.presence || "Premium Stats"
