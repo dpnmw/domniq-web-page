@@ -22,17 +22,17 @@ UPLOAD_SETTINGS = %w[
   domniq_web_preloader_logo_dark domniq_web_preloader_logo_light
 ].freeze
 
-register_upload_in_use do |upload|
-  UPLOAD_SETTINGS.any? do |setting_name|
-    begin
-      SiteSetting.public_send(setting_name)&.id == upload.id
-    rescue
-      false
+after_initialize do
+  register_upload_in_use do |upload|
+    UPLOAD_SETTINGS.any? do |setting_name|
+      begin
+        SiteSetting.public_send(setting_name)&.id == upload.id
+      rescue
+        false
+      end
     end
   end
-end
 
-after_initialize do
   require_relative "lib/dwp/helpers"
   require_relative "lib/dwp/icons"
   require_relative "lib/dwp/data_fetcher"
