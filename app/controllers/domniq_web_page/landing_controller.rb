@@ -21,6 +21,7 @@ module DomniqWebPage
             "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; " \
             "style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; " \
             "img-src 'self' #{base_url} data: https:; " \
+            "media-src 'self' data: https:; " \
             "font-src 'self' #{base_url} https://fonts.gstatic.com https://cdnjs.cloudflare.com; " \
             "connect-src 'self' #{base_url}; " \
             "frame-src https://www.youtube.com https://www.youtube-nocookie.com; " \
