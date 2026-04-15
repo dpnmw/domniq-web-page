@@ -52,6 +52,7 @@ module DomniqWebPage
 
       result = remote_check(domain, key)
       store_result(result)
+      send_heartbeat(result) if SiteSetting.respond_to?(:domniq_web_telemetry_enabled) && SiteSetting.domniq_web_telemetry_enabled
       result
     end
 
@@ -195,6 +196,34 @@ module DomniqWebPage
 
     def self.store_result(result)
       PluginStore.set(DomniqWebPage::PLUGIN_NAME, CACHE_KEY, result)
+    end
+
+    TELEMETRY_URL = "https://api.dpnmediaworks.com/api/telemetry/heartbeat"
+
+    def self.send_heartbeat(result)
+      Thread.new do
+        begin
+          plugin = Discourse.plugins.find { |p| p.metadata.name == "domniq-web-page" }
+          Excon.post(
+            TELEMETRY_URL,
+            body: {
+              site_url: Discourse.base_url,
+              plugin: "domniq-web-page",
+              plugin_version: plugin&.metadata&.version || "unknown",
+              discourse_version: Discourse::VERSION::STRING,
+              license_key: license_key,
+              licensed: result["license_active"] == true,
+              total_users: User.real.count,
+              active_users_30d: User.real.where("last_seen_at > ?", 30.days.ago).count,
+            }.to_json,
+            headers: { "Content-Type" => "application/json" },
+            connect_timeout: 5,
+            read_timeout: 5,
+          )
+        rescue StandardError => e
+          Rails.logger.warn("[DomniqWebPage] Heartbeat failed: #{e.message}")
+        end
+      end
     end
 
     def self.cache_expired?(cached)
