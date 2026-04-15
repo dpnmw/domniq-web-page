@@ -19,7 +19,7 @@ export default class DwpAboutScreen extends Component {
     <button class="dwp-subscreen__back" type="button" {{on "click" this.c.closeSection}}>← Back to Sections</button>
     <div class="dwp-toggle-row"><span>Enable About</span><DwpField @type="bool" @configKey="about_enabled" @value={{this.val "about_enabled"}} @onChange={{this.update}} /></div>
 
-    <DwpAccordion @title="Content" @open={{true}}>
+    <DwpAccordion @title="Content" @open={{true}} @icon="pen-to-square">
       <DwpRow @title="Heading Enabled" @desc="Show the section heading above the about card"><DwpField @type="bool" @configKey="about_heading_enabled" @value={{this.val "about_heading_enabled"}} @onChange={{this.update}} /></DwpRow>
       <DwpRow @title="Heading" @desc="Section heading text"><DwpField @type="string" @configKey="about_heading" @value={{this.val "about_heading"}} @onChange={{this.update}} /></DwpRow>
       <DwpRow @title="Community Name" @desc="Author name shown below the quote"><DwpField @type="string" @configKey="about_title" @value={{this.val "about_title"}} @onChange={{this.update}} /></DwpRow>
@@ -27,21 +27,21 @@ export default class DwpAboutScreen extends Component {
       <DwpRow @title="Body" @desc="Main description text, supports basic HTML"><DwpField @type="text_area" @configKey="about_body" @value={{this.val "about_body"}} @onChange={{this.update}} /></DwpRow>
     </DwpAccordion>
 
-    <DwpAccordion @title="Title Style">
+    <DwpAccordion @title="Title Style" @icon="heading">
       <DwpRow @title="Title Size (px)" @desc="Custom font size for the heading, 0 uses the default"><DwpField @type="integer" @configKey="about_title_size" @value={{this.val "about_title_size"}} @min="0" @max="80" @onChange={{this.update}} /></DwpRow>
     </DwpAccordion>
 
-    <DwpAccordion @title="Images">
+    <DwpAccordion @title="Images" @icon="image">
       <DwpUploadNote @fieldName="about_image" />
       <DwpUploadNote @fieldName="about_bg_image" />
     </DwpAccordion>
 
-    <DwpAccordion @title="Card Colours">
+    <DwpAccordion @title="Card Colours" @icon="palette">
       <DwpRow @title="Card Colour (Dark)" @desc="About card background in dark mode"><DwpField @type="color" @configKey="about_card_color_dark" @value={{this.val "about_card_color_dark"}} @onChange={{this.update}} /></DwpRow>
       <DwpRow @title="Card Colour (Light)" @desc="About card background in light mode"><DwpField @type="color" @configKey="about_card_color_light" @value={{this.val "about_card_color_light"}} @onChange={{this.update}} /></DwpRow>
     </DwpAccordion>
 
-    <DwpAccordion @title="Section Styling">
+    <DwpAccordion @title="Section Styling" @icon="sliders">
       <DwpRow @title="Background (Dark)" @desc="Section background in dark mode"><DwpField @type="color" @configKey="about_bg_dark" @value={{this.val "about_bg_dark"}} @onChange={{this.update}} /></DwpRow>
       <DwpRow @title="Background (Light)" @desc="Section background in light mode"><DwpField @type="color" @configKey="about_bg_light" @value={{this.val "about_bg_light"}} @onChange={{this.update}} /></DwpRow>
       <DwpRow @title="Min Height" @desc="Minimum section height in pixels, 0 for auto"><DwpField @type="integer" @configKey="about_min_height" @value={{this.val "about_min_height"}} @min="0" @max="2000" @onChange={{this.update}} /></DwpRow>

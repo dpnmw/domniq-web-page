@@ -526,7 +526,23 @@
   gap: 0.5rem;
 }
 
-.dwp-accordion__chevron {
+.dwp-accordion__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  background: linear-gradient(135deg, rgba(var(--tertiary-rgb), 0.15), rgba(var(--tertiary-rgb), 0.05));
+  flex-shrink: 0;
+
+  i {
+    font-size: 0.7rem;
+    color: var(--tertiary);
+  }
+}
+
+.dwp-accordion__toggle {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -535,16 +551,22 @@
   border-radius: 8px;
   background: var(--primary-very-low);
   border: 1px solid var(--primary-low);
-  font-size: 0.75rem;
-  color: var(--primary-medium);
-  transition: transform 0.25s, background 0.15s, color 0.15s, border-color 0.15s;
   flex-shrink: 0;
+  transition: background 0.15s, border-color 0.15s;
+
+  i {
+    font-size: 0.7rem;
+    color: var(--primary-medium);
+    transition: color 0.15s;
+  }
 
   .dwp-accordion--open & {
-    transform: rotate(180deg);
-    background: rgba(var(--tertiary-rgb), 0.1);
-    border-color: rgba(var(--tertiary-rgb), 0.3);
-    color: var(--tertiary);
+    background: rgba(239, 68, 68, 0.08);
+    border-color: rgba(239, 68, 68, 0.25);
+
+    i {
+      color: #ef4444;
+    }
   }
 }
 

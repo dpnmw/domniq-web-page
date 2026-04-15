@@ -31,7 +31,7 @@ export default class DwpHeroScreen extends Component {
   <template>
     <button class="dwp-subscreen__back" type="button" {{on "click" this.c.closeSection}}>← Back to Sections</button>
 
-    <DwpAccordion @title="Content" @open={{true}}>
+    <DwpAccordion @title="Content" @open={{true}} @icon="pen-to-square">
       <DwpRow @title="Hero Title"><DwpField @type="string" @configKey="hero_title" @value={{this.val "hero_title"}} @onChange={{this.update}} /></DwpRow>
       <DwpRow @title="Accent Word Enabled"><DwpField @type="bool" @configKey="hero_accent_enabled" @value={{this.val "hero_accent_enabled"}} @onChange={{this.update}} /></DwpRow>
       {{#if this.showAccentWord}}
@@ -47,7 +47,7 @@ export default class DwpHeroScreen extends Component {
       </DwpRow>
     </DwpAccordion>
 
-    <DwpAccordion @title="Title Style">
+    <DwpAccordion @title="Title Style" @icon="heading">
       <DwpRow @title="Title Size (px)"><DwpField @type="integer" @configKey="hero_title_size" @value={{this.val "hero_title_size"}} @min="0" @max="120" @onChange={{this.update}} /></DwpRow>
       <DwpRow @title="Letter Spacing (px)"><DwpField @type="integer" @configKey="hero_title_letter_spacing" @value={{this.val "hero_title_letter_spacing"}} @min="-5" @max="20" @onChange={{this.update}} /></DwpRow>
       <DwpRow @title="Text Shadow"><DwpField @type="bool" @configKey="hero_text_shadow" @value={{this.val "hero_text_shadow"}} @onChange={{this.update}} /></DwpRow>
@@ -57,14 +57,14 @@ export default class DwpHeroScreen extends Component {
       <DwpRow @title="Subtitle Colour (Light)"><DwpField @type="color" @configKey="hero_subtitle_color_light" @value={{this.val "hero_subtitle_color_light"}} @onChange={{this.update}} /></DwpRow>
     </DwpAccordion>
 
-    <DwpAccordion @title="Card">
+    <DwpAccordion @title="Card" @icon="square">
       <DwpRow @title="Card Enabled"><DwpField @type="bool" @configKey="hero_card_enabled" @value={{this.val "hero_card_enabled"}} @onChange={{this.update}} /></DwpRow>
       <DwpRow @title="Card Opacity"><DwpField @type="string" @configKey="hero_card_opacity" @value={{this.val "hero_card_opacity"}} @onChange={{this.update}} /></DwpRow>
       <DwpRow @title="Card BG (Dark)"><DwpField @type="color" @configKey="hero_card_bg_dark" @value={{this.val "hero_card_bg_dark"}} @onChange={{this.update}} /></DwpRow>
       <DwpRow @title="Card BG (Light)"><DwpField @type="color" @configKey="hero_card_bg_light" @value={{this.val "hero_card_bg_light"}} @onChange={{this.update}} /></DwpRow>
     </DwpAccordion>
 
-    <DwpAccordion @title="Background">
+    <DwpAccordion @title="Background" @icon="panorama">
       <DwpUploadNote @fieldName="hero_bg_image" />
       <DwpRow @title="Background Effect">
         <div class="dwp-tile-grid">
@@ -80,14 +80,14 @@ export default class DwpHeroScreen extends Component {
       {{/if}}
     </DwpAccordion>
 
-    <DwpAccordion @title="Side Image">
+    <DwpAccordion @title="Side Image" @icon="image">
       <DwpUploadNote @fieldName="hero_image" />
       <DwpRow @title="Image First"><DwpField @type="bool" @configKey="hero_image_first" @value={{this.val "hero_image_first"}} @onChange={{this.update}} /></DwpRow>
       <DwpRow @title="Image Weight (1-3)"><DwpField @type="integer" @configKey="hero_image_weight" @value={{this.val "hero_image_weight"}} @min="1" @max="3" @onChange={{this.update}} /></DwpRow>
       <DwpRow @title="Max Height (vh)"><DwpField @type="integer" @configKey="hero_image_max_height" @value={{this.val "hero_image_max_height"}} @min="10" @max="100" @onChange={{this.update}} /></DwpRow>
     </DwpAccordion>
 
-    <DwpAccordion @title="Buttons">
+    <DwpAccordion @title="Buttons" @icon="hand-pointer">
       <DwpRow @title="Button Shadows"><DwpField @type="bool" @configKey="hero_buttons_shadow" @value={{this.val "hero_buttons_shadow"}} @onChange={{this.update}} /></DwpRow>
       <h4 class="dwp-subgroup-label">Primary Button</h4>
       <DwpRow @title="Enabled"><DwpField @type="bool" @configKey="hero_primary_button_enabled" @value={{this.val "hero_primary_button_enabled"}} @onChange={{this.update}} /></DwpRow>
@@ -103,14 +103,14 @@ export default class DwpHeroScreen extends Component {
       <DwpRow @title="Colour (Light)"><DwpField @type="color" @configKey="hero_secondary_btn_color_light" @value={{this.val "hero_secondary_btn_color_light"}} @onChange={{this.update}} /></DwpRow>
     </DwpAccordion>
 
-    <DwpAccordion @title="Video">
+    <DwpAccordion @title="Video" @icon="play">
       <DwpRow @title="Video URL"><DwpField @type="string" @configKey="hero_video_url" @value={{this.val "hero_video_url"}} @onChange={{this.update}} /></DwpRow>
       <DwpRow @title="Button Colour"><DwpField @type="color" @configKey="hero_video_button_color" @value={{this.val "hero_video_button_color"}} @onChange={{this.update}} /></DwpRow>
       <DwpRow @title="Button Position"><DwpField @type="enum" @configKey="hero_video_button_position" @value={{this.val "hero_video_button_position"}} @choices={{this.videoPos}} @onChange={{this.update}} /></DwpRow>
       <DwpRow @title="Blur on Hover"><DwpField @type="bool" @configKey="hero_video_blur_on_hover" @value={{this.val "hero_video_blur_on_hover"}} @onChange={{this.update}} /></DwpRow>
     </DwpAccordion>
 
-    <DwpAccordion @title="Contributors">
+    <DwpAccordion @title="Contributors" @icon="users">
       <DwpRow @title="Enabled"><DwpField @type="bool" @configKey="contributors_enabled" @value={{this.val "contributors_enabled"}} @onChange={{this.update}} /></DwpRow>
       <DwpRow @title="Title Enabled"><DwpField @type="bool" @configKey="contributors_title_enabled" @value={{this.val "contributors_title_enabled"}} @onChange={{this.update}} /></DwpRow>
       <DwpRow @title="Title"><DwpField @type="string" @configKey="contributors_title" @value={{this.val "contributors_title"}} @onChange={{this.update}} /></DwpRow>
@@ -129,7 +129,7 @@ export default class DwpHeroScreen extends Component {
       <DwpRow @title="Pill BG (Light)"><DwpField @type="color" @configKey="contributors_pill_bg_light" @value={{this.val "contributors_pill_bg_light"}} @onChange={{this.update}} /></DwpRow>
     </DwpAccordion>
 
-    <DwpAccordion @title="Section Styling">
+    <DwpAccordion @title="Section Styling" @icon="sliders">
       <DwpRow @title="Background (Dark)"><DwpField @type="color" @configKey="hero_bg_dark" @value={{this.val "hero_bg_dark"}} @onChange={{this.update}} /></DwpRow>
       <DwpRow @title="Background (Light)"><DwpField @type="color" @configKey="hero_bg_light" @value={{this.val "hero_bg_light"}} @onChange={{this.update}} /></DwpRow>
       <DwpRow @title="Min Height (vh)"><DwpField @type="integer" @configKey="hero_min_height" @value={{this.val "hero_min_height"}} @min="0" @max="100" @onChange={{this.update}} /></DwpRow>

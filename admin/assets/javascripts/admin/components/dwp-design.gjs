@@ -39,7 +39,7 @@ export default class DwpDesign extends Component {
       </:icon>
       <:content>
 
-        <DwpAccordion @title="Colours" @open={{true}}>
+        <DwpAccordion @title="Colours" @open={{true}} @icon="palette">
           <DwpRow @title="Accent Colour" @desc="Primary accent across the landing page"><DwpField @type="color" @configKey="accent_color" @value={{this.val "accent_color"}} @onChange={{this.update}} /></DwpRow>
           <DwpRow @title="Accent Hover Colour" @desc="Colour when hovering over accent elements"><DwpField @type="color" @configKey="accent_hover_color" @value={{this.val "accent_hover_color"}} @onChange={{this.update}} /></DwpRow>
           <DwpRow @title="Dark Background" @desc="Page background in dark mode"><DwpField @type="color" @configKey="dark_bg_color" @value={{this.val "dark_bg_color"}} @onChange={{this.update}} /></DwpRow>
@@ -48,7 +48,7 @@ export default class DwpDesign extends Component {
           <DwpRow @title="Orb Opacity" @desc="0-100"><DwpField @type="integer" @configKey="orb_opacity" @value={{this.val "orb_opacity"}} @min="0" @max="100" @onChange={{this.update}} /></DwpRow>
         </DwpAccordion>
 
-        <DwpAccordion @title="Typography">
+        <DwpAccordion @title="Typography" @icon="font">
           <DwpRow @title="Google Font" @desc="Body font used across the entire landing page">
             <div class="dwp-font-field">
               <div class="dwp-font-field__input-wrap">
@@ -69,13 +69,13 @@ export default class DwpDesign extends Component {
           </DwpRow>
         </DwpAccordion>
 
-        <DwpAccordion @title="Logo">
+        <DwpAccordion @title="Logo" @icon="image">
           <DwpRow @title="Logo Height" @desc="16-80px"><DwpField @type="integer" @configKey="logo_height" @value={{this.val "logo_height"}} @min="16" @max="80" @onChange={{this.update}} /></DwpRow>
           <DwpRow @title="Use Accent Colour" @desc="Tint the logo with the accent colour using a CSS mask"><DwpField @type="bool" @configKey="logo_use_accent_color" @value={{this.val "logo_use_accent_color"}} @onChange={{this.update}} /></DwpRow>
           <DwpUploadNote @fieldName="logo_dark, logo_light, footer_logo" />
         </DwpAccordion>
 
-        <DwpAccordion @title="Animations & Effects">
+        <DwpAccordion @title="Animations & Effects" @icon="wand-magic-sparkles">
           <DwpRow @title="Scroll Animation" @desc="Animation style for sections entering viewport">
             <div class="dwp-tile-grid">
               {{#each this.animTiles as |tile|}}
@@ -89,7 +89,7 @@ export default class DwpDesign extends Component {
           <DwpRow @title="Scroll Progress Bar" @desc="Show a thin progress bar at the top of the navbar"><DwpField @type="bool" @configKey="scroll_progress_enabled" @value={{this.val "scroll_progress_enabled"}} @onChange={{this.update}} /></DwpRow>
         </DwpAccordion>
 
-        <DwpAccordion @title="Preloader">
+        <DwpAccordion @title="Preloader" @icon="spinner">
           <DwpRow @title="Enable Preloader" @desc="Show a loading screen with progress bar before the page appears"><DwpField @type="bool" @configKey="preloader_enabled" @value={{this.val "preloader_enabled"}} @onChange={{this.update}} /></DwpRow>
           <div class={{if this.preloaderDisabled "dwp-accordion__body--dimmed"}}>
             <DwpRow @title="Min Duration (ms)" @desc="Minimum time the preloader is shown, even if content loads faster"><DwpField @type="integer" @configKey="preloader_min_duration" @value={{this.val "preloader_min_duration"}} @min="0" @max="5000" @onChange={{this.update}} /></DwpRow>

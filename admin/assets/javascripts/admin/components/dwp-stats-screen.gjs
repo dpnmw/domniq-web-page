@@ -23,13 +23,13 @@ export default class DwpStatsScreen extends Component {
     <button class="dwp-subscreen__back" type="button" {{on "click" this.c.closeSection}}>← Back to Sections</button>
     <div class="dwp-toggle-row"><span>Enable Stats</span><DwpField @type="bool" @configKey="stats_enabled" @value={{this.val "stats_enabled"}} @onChange={{this.update}} /></div>
 
-    <DwpAccordion @title="Title" @open={{true}}>
+    <DwpAccordion @title="Title" @open={{true}} @icon="heading">
       <DwpRow @title="Title Enabled" @desc="Show or hide the section heading"><DwpField @type="bool" @configKey="stats_title_enabled" @value={{this.val "stats_title_enabled"}} @onChange={{this.update}} /></DwpRow>
       <DwpRow @title="Title" @desc="Heading text above the stat cards"><DwpField @type="string" @configKey="stats_title" @value={{this.val "stats_title"}} @onChange={{this.update}} /></DwpRow>
       <DwpRow @title="Title Size (px)" @desc="Custom font size, 0 uses the default"><DwpField @type="integer" @configKey="stats_title_size" @value={{this.val "stats_title_size"}} @min="0" @max="80" @onChange={{this.update}} /></DwpRow>
     </DwpAccordion>
 
-    <DwpAccordion @title="Card Style">
+    <DwpAccordion @title="Card Style" @icon="table-cells">
       <DwpRow @title="Card Style" @desc="Visual shape of each stat card">
         <div class="dwp-tile-grid">
           {{#each this.cardStyles as |style|}}
@@ -50,7 +50,7 @@ export default class DwpStatsScreen extends Component {
       <DwpRow @title="Card BG (Light)" @desc="Card background in light mode"><DwpField @type="color" @configKey="stat_card_bg_light" @value={{this.val "stat_card_bg_light"}} @onChange={{this.update}} /></DwpRow>
     </DwpAccordion>
 
-    <DwpAccordion @title="Labels & Data">
+    <DwpAccordion @title="Labels & Data" @icon="tags">
       <DwpRow @title="Show Labels" @desc="Display text labels below each counter"><DwpField @type="bool" @configKey="stat_labels_enabled" @value={{this.val "stat_labels_enabled"}} @onChange={{this.update}} /></DwpRow>
       <DwpRow @title="Round Numbers" @desc="Show 1.2K instead of 1,234"><DwpField @type="bool" @configKey="stat_round_numbers" @value={{this.val "stat_round_numbers"}} @onChange={{this.update}} /></DwpRow>
       <DwpRow @title="Members Label" @desc="Text below the members counter"><DwpField @type="string" @configKey="stat_members_label" @value={{this.val "stat_members_label"}} @onChange={{this.update}} /></DwpRow>
@@ -60,7 +60,7 @@ export default class DwpStatsScreen extends Component {
       <DwpRow @title="Chats Label" @desc="Text below the chats counter"><DwpField @type="string" @configKey="stat_chats_label" @value={{this.val "stat_chats_label"}} @onChange={{this.update}} /></DwpRow>
     </DwpAccordion>
 
-    <DwpAccordion @title="Section Styling">
+    <DwpAccordion @title="Section Styling" @icon="sliders">
       <DwpRow @title="Background (Dark)" @desc="Section background in dark mode"><DwpField @type="color" @configKey="stats_bg_dark" @value={{this.val "stats_bg_dark"}} @onChange={{this.update}} /></DwpRow>
       <DwpRow @title="Background (Light)" @desc="Section background in light mode"><DwpField @type="color" @configKey="stats_bg_light" @value={{this.val "stats_bg_light"}} @onChange={{this.update}} /></DwpRow>
       <DwpRow @title="Min Height" @desc="Minimum section height in pixels, 0 for auto"><DwpField @type="integer" @configKey="stats_min_height" @value={{this.val "stats_min_height"}} @min="0" @max="2000" @onChange={{this.update}} /></DwpRow>
