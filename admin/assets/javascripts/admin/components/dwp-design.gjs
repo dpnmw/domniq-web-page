@@ -24,6 +24,14 @@ export default class DwpDesign extends Component {
     this.update("scroll_animation", anim);
   };
 
+  handleBodyFont = (event) => {
+    this.update("google_font_name", event.target.value);
+  };
+
+  handleTitleFont = (event) => {
+    this.update("title_font_name", event.target.value);
+  };
+
   <template>
     <DwpPageLayout @titleLabel="dwp.admin.design_title" @descriptionLabel="dwp.admin.design_description">
       <:icon>
@@ -41,8 +49,24 @@ export default class DwpDesign extends Component {
         </DwpAccordion>
 
         <DwpAccordion @title="Typography">
-          <DwpRow @title="Google Font" @desc="Body font family"><DwpField @type="string" @configKey="google_font_name" @value={{this.val "google_font_name"}} @onChange={{this.update}} /></DwpRow>
-          <DwpRow @title="Title Font" @desc="Optional separate title font"><DwpField @type="string" @configKey="title_font_name" @value={{this.val "title_font_name"}} @onChange={{this.update}} /></DwpRow>
+          <DwpRow @title="Google Font" @desc="Body font used across the entire landing page">
+            <div class="dwp-font-field">
+              <div class="dwp-font-field__input-wrap">
+                <span class="dwp-font-field__icon">Aa</span>
+                <input type="text" value={{this.val "google_font_name"}} class="dwp-field__input dwp-font-field__input" placeholder="e.g. Outfit, Inter, Poppins" {{on "input" this.handleBodyFont}} />
+              </div>
+              <a href="https://fonts.google.com" target="_blank" rel="noopener noreferrer" class="dwp-font-field__link">Browse Google Fonts &rarr;</a>
+            </div>
+          </DwpRow>
+          <DwpRow @title="Title Font" @desc="Optional separate font for headings and titles">
+            <div class="dwp-font-field">
+              <div class="dwp-font-field__input-wrap">
+                <span class="dwp-font-field__icon">Tt</span>
+                <input type="text" value={{this.val "title_font_name"}} class="dwp-field__input dwp-font-field__input" placeholder="Leave empty to use body font" {{on "input" this.handleTitleFont}} />
+              </div>
+              <a href="https://fonts.google.com/?category=Serif,Display" target="_blank" rel="noopener noreferrer" class="dwp-font-field__link">Browse Display &amp; Serif Fonts &rarr;</a>
+            </div>
+          </DwpRow>
         </DwpAccordion>
 
         <DwpAccordion @title="Logo">

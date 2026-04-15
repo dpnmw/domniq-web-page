@@ -863,8 +863,7 @@ module DomniqWebPage
       lib = (cfg("general", "icon_library") || "none").to_s
       if lib != "none" && raw_label.include?("|")
         parsed = parse_icon_label(raw_label)
-        if parsed
-          icon_html = icon_tag(parsed[0], "dw-leaderboard-stat__icon", parsed[1])
+        if parsed && (icon_html = icon_tag(parsed[0], "dw-leaderboard-stat__icon", parsed[1]))
           label = parsed[2]
         else
           icon_html = default_svg
@@ -886,6 +885,7 @@ module DomniqWebPage
       parsed = parse_icon_label(raw_label)
       return e(raw_label) unless parsed
       icon = icon_tag(parsed[0], nil, parsed[1])
+      return e(raw_label) unless icon
       label = e(parsed[2])
       parsed[3] == :after ? "#{label} #{icon}" : "#{icon} #{label}"
     end

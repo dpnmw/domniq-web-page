@@ -50,9 +50,23 @@ export default class DwpGeneral extends Component {
         <div class="dwp-card dwp-card--features">
           <div class="dwp-card__body">
             <h3 class="dwp-card__heading">Icons</h3>
-            <DwpRow @title="Icon Library" @desc="Icon set for button labels and titles">
+            <DwpRow @title="Icon Library" @desc="Choose an icon set for buttons, titles, and stat labels">
               <DwpField @type="enum" @configKey="icon_library" @value={{this.val "icon_library"}} @choices={{this.iconChoices}} @onChange={{this.update}} />
             </DwpRow>
+            <div class="dwp-icon-hint">
+              <h4 class="dwp-icon-hint__title">How to use icons</h4>
+              <p class="dwp-icon-hint__text">Add icons to any button label, section title, or stat label using the pipe syntax:</p>
+              <div class="dwp-icon-hint__examples">
+                <code class="dwp-icon-hint__code">icon-name | Button Text</code>
+                <code class="dwp-icon-hint__code">Button Text | icon-name</code>
+                <code class="dwp-icon-hint__code">icon-name | 20 | Text with size</code>
+              </div>
+              <p class="dwp-icon-hint__text">Icon goes before or after the pipe. Optional pixel size in the middle.</p>
+              <div class="dwp-icon-hint__links">
+                <a href="https://fontawesome.com/search?o=r&m=free&s=solid" target="_blank" rel="noopener noreferrer">Browse Font Awesome Icons &rarr;</a>
+                <a href="https://fonts.google.com/icons?icon.set=Material+Symbols" target="_blank" rel="noopener noreferrer">Browse Google Material Icons &rarr;</a>
+              </div>
+            </div>
           </div>
         </div>
 
