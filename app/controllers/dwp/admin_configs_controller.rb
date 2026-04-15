@@ -16,12 +16,23 @@ module DomniqWebPage
       type = params[:config_type]
       raise Discourse::NotFound unless allowed_types.include?(type)
 
+      known_keys = Config.for_type(type).pluck(:config_key).to_set
+
       errors = []
       (params[:configs] || {}).each do |key, value|
-        record = Config.find_or_initialize_by(config_type: type, config_key: key.to_s)
-        record.config_value = value.to_s
+        key_str = key.to_s
+
+        # Reject keys that were not seeded — prevents arbitrary key injection
+        unless known_keys.include?(key_str)
+          errors << "#{key_str}: unknown config key"
+          next
+        end
+
+        value_str = value.to_s.slice(0, 10_000)
+        record = Config.find_or_initialize_by(config_type: type, config_key: key_str)
+        record.config_value = value_str
         record.enabled = true
-        errors << "#{key}: #{record.errors.full_messages.join(', ')}" unless record.save
+        errors << "#{key_str}: #{record.errors.full_messages.join(', ')}" unless record.save
       end
 
       if errors.any?

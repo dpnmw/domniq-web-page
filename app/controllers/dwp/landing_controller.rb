@@ -18,8 +18,36 @@ module DomniqWebPage
       render html: html.html_safe, layout: false, content_type: "text/html"
 
     rescue => e
-      Rails.logger.error("[DWP] Landing error: #{e.class}: #{e.message}\n#{e.backtrace&.first(10)&.join("\n")}")
-      redirect_to "/login"
+      Rails.logger.error(
+        "[DWP] Landing page render error: #{e.class}: #{e.message}\n" \
+        "#{e.backtrace&.first(15)&.join("\n")}"
+      )
+
+      if Rails.env.development?
+        bt = e.backtrace&.first(15)&.join("\n") rescue ""
+        error_page = <<~HTML
+          <!DOCTYPE html>
+          <html>
+          <head><meta charset="UTF-8"><title>DWP Error</title>
+          <style>
+            body { font-family: monospace; padding: 2em; background: #111; color: #eee; }
+            pre  { background: #1a1a2e; padding: 1em; overflow-x: auto;
+                   border-radius: 8px; font-size: 13px; }
+          </style>
+          </head>
+          <body>
+          <h1 style="color:#e74c3c">Domniq Web Page Error</h1>
+          <p><strong>#{ERB::Util.html_escape(e.class)}</strong>:
+             #{ERB::Util.html_escape(e.message)}</p>
+          <pre>#{ERB::Util.html_escape(bt)}</pre>
+          </body>
+          </html>
+        HTML
+        render html: error_page.html_safe, layout: false,
+               content_type: "text/html", status: 500
+      else
+        redirect_to "/login"
+      end
     end
 
     private
