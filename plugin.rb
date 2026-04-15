@@ -37,7 +37,7 @@ after_initialize do
   Discourse::Application.routes.append { mount ::DomniqWebPage::Engine, at: "/dwp" }
 
   Discourse::Application.routes.prepend do
-    root to: "dwp/landing#index",
+    root to: "domniq_web_page/landing#index",
          as: "root",
          constraints: ->(req) {
            begin
