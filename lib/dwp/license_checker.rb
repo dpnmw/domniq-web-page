@@ -165,7 +165,7 @@ module DomniqWebPage
       )
 
       data = JSON.parse(response.body)
-      result = {
+      {
         "license_active" => data["active"] == true,
         "domain" => domain,
         "email" => data["email"],
@@ -174,10 +174,22 @@ module DomniqWebPage
         "error" => data["error"],
         "checked_at" => Time.now.iso8601,
       }
-      result
-    rescue Excon::Error, JSON::ParserError, StandardError => e
-      Rails.logger.warn("[DomniqWebPage] License check failed: #{e.message}")
+    rescue Excon::Error => e
+      Rails.logger.warn("[DomniqWebPage] License check network error: #{e.message}")
       fallback_result(domain)
+    rescue JSON::ParserError, StandardError => e
+      Rails.logger.warn("[DomniqWebPage] License check failed: #{e.message}")
+      inactive_result(domain, "Unable to verify licence")
+    end
+
+    def self.inactive_result(domain, error = nil)
+      result = {
+        "license_active" => false,
+        "domain" => domain,
+        "error" => error,
+        "checked_at" => Time.now.iso8601,
+      }
+      result
     end
 
     def self.fallback_result(domain)
