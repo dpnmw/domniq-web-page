@@ -9,6 +9,18 @@ module DomniqWebPage
       render json: license_json(result)
     end
 
+    def activate
+      key = params.require(:license_key)
+      result = DomniqWebPage::LicenseChecker.activate(key)
+
+      if result["license_active"]
+        render json: license_json(result)
+      else
+        render json: license_json(result).merge(error: result["error"] || "Invalid licence key."),
+               status: :unprocessable_entity
+      end
+    end
+
     def check
       result = DomniqWebPage::LicenseChecker.check(force: true)
       render json: license_json(result)

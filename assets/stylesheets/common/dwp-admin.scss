@@ -1142,6 +1142,26 @@
 
 // ── Support ──
 
+.dwp-support__actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--primary-very-low);
+}
+
+.dwp-support__key-input {
+  font-family: "SFMono-Regular", Consolas, monospace;
+  letter-spacing: 0.03em;
+}
+
+.dwp-support__key-display {
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--primary-medium);
+}
+
 .dwp-support__row {
   display: flex;
   align-items: center;

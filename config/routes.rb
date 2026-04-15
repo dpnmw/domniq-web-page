@@ -19,6 +19,7 @@ Discourse::Application.routes.draw do
       get  "/configs/:config_type" => "domniq_web_page/admin_configs#show"
       put  "/configs/:config_type" => "domniq_web_page/admin_configs#bulk_update"
       get  "/license/status"       => "domniq_web_page/admin_license#status"
+      post "/license/activate"    => "domniq_web_page/admin_license#activate"
       post "/license/check"        => "domniq_web_page/admin_license#check"
       post "/admin/pin-upload"     => "domniq_web_page/admin_uploads#pin_upload"
       get  "/landing-css"          => "domniq_web_page/admin#landing_css"

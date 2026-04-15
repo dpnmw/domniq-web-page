@@ -7,7 +7,6 @@ module DomniqWebPage
     CACHE_KEY = "dwp_license_status"
     CACHE_TTL = 86_400 # 24 hours
     REMOTE_URL = "https://api.dpnmediaworks.com/api/check"
-    PRODUCT_SLUG = "domniq-web-page"
 
     BLOCKED_HOSTS = %w[
       localhost
@@ -63,7 +62,12 @@ module DomniqWebPage
     end
 
     def self.license_key
-      SiteSetting.respond_to?(:domniq_web_license_key) ? SiteSetting.domniq_web_license_key : nil
+      PluginStore.get(DomniqWebPage::PLUGIN_NAME, "license_key")
+    end
+
+    def self.activate(key)
+      PluginStore.set(DomniqWebPage::PLUGIN_NAME, "license_key", key)
+      check(force: true)
     end
 
     def self.license_key_masked
@@ -147,7 +151,7 @@ module DomniqWebPage
     def self.remote_check(domain, key)
       response = Excon.post(
         REMOTE_URL,
-        body: { license_key: key, domain: domain, product: PRODUCT_SLUG }.to_json,
+        body: { license_key: key, domain: domain }.to_json,
         headers: { "Content-Type" => "application/json" },
         connect_timeout: 5,
         read_timeout: 5,

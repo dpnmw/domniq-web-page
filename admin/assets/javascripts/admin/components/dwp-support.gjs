@@ -4,13 +4,16 @@ import { action } from "@ember/object";
 import { on } from "@ember/modifier";
 import { htmlSafe } from "@ember/template";
 import { ajax } from "discourse/lib/ajax";
+import { popupAjaxError } from "discourse/lib/ajax-error";
 import DwpPageLayout from "./dwp-page-layout";
 import DwpRow from "./dwp-row";
 import { getIcon } from "./dwp-icons";
 
 export default class DwpSupport extends Component {
   @tracked license = null;
+  @tracked licenseKey = "";
   @tracked checking = false;
+  @tracked activating = false;
 
   constructor() {
     super(...arguments);
@@ -26,15 +29,48 @@ export default class DwpSupport extends Component {
   }
 
   @action
+  updateLicenseKey(event) {
+    this.licenseKey = event.target.value;
+  }
+
+  @action
+  async activateLicense() {
+    if (!this.licenseKey.trim()) return;
+    this.activating = true;
+    try {
+      const result = await ajax("/admin/plugins/domniq-web-page/license/activate.json", {
+        type: "POST",
+        data: { license_key: this.licenseKey.trim() },
+      });
+      this.license = result;
+      if (result.licensed) {
+        this.licenseKey = "";
+        window.location.reload();
+      }
+    } catch (e) {
+      popupAjaxError(e);
+    } finally {
+      this.activating = false;
+    }
+  }
+
+  @action
   async checkLicense() {
     this.checking = true;
     try {
       this.license = await ajax("/admin/plugins/domniq-web-page/license/check.json", { type: "POST" });
+      if (this.license.licensed) {
+        window.location.reload();
+      }
     } catch {
       this.license = { licensed: false, error: "Check failed" };
     } finally {
       this.checking = false;
     }
+  }
+
+  get isLicensed() {
+    return this.license?.licensed === true;
   }
 
   get statusLabel() {
@@ -58,19 +94,46 @@ export default class DwpSupport extends Component {
       <:content>
         <div class="dwp-card dwp-card--settings">
           <div class="dwp-card__body">
-            <h3 class="dwp-card__heading"><span class="dwp-card__heading-icon">{{this.iconHtml "toggle"}}</span>Licence Status</h3>
-            <div class="dwp-support__row">
+            <h3 class="dwp-card__heading"><span class="dwp-card__heading-icon">{{this.iconHtml "lock"}}</span>Licence Status</h3>
+            <p class="dwp-card__desc">Your current Domniq Web Page licence status and activation.</p>
+
+            <DwpRow @title="Status" @desc="Whether your licence is currently active">
               <span class="dwp-support__status {{this.statusClass}}">{{this.statusLabel}}</span>
+            </DwpRow>
+
+            {{#if this.isLicensed}}
               {{#if this.license.license_key}}
-                <span class="dwp-support__key">{{this.license.license_key}}</span>
+                <DwpRow @title="Licence Key" @desc="Your activated licence key">
+                  <span class="dwp-support__key-display">{{this.license.license_key}}</span>
+                </DwpRow>
               {{/if}}
               {{#if this.license.expires_at}}
-                <span class="dwp-support__expiry">Expires: {{this.license.expires_at}}</span>
+                <DwpRow @title="Expires" @desc="When your licence expires">
+                  <span class="dwp-support__expiry">{{this.license.expires_at}}</span>
+                </DwpRow>
               {{/if}}
+            {{else}}
+              <DwpRow @title="Licence Key" @desc="Enter your licence key from DPN Media Works">
+                <input
+                  type="text"
+                  value={{this.licenseKey}}
+                  {{on "input" this.updateLicenseKey}}
+                  placeholder="XXXX-XXXX-XXXX-XXXX"
+                  class="dwp-field__input dwp-support__key-input"
+                />
+              </DwpRow>
+            {{/if}}
+
+            <div class="dwp-support__actions">
+              {{#unless this.isLicensed}}
+                <button type="button" class="btn btn-primary btn-small" disabled={{this.activating}} {{on "click" this.activateLicense}}>
+                  {{if this.activating "Activating..." "Activate Licence"}}
+                </button>
+              {{/unless}}
+              <button type="button" class="btn btn-default btn-small" disabled={{this.checking}} {{on "click" this.checkLicense}}>
+                {{if this.checking "Checking..." "Check Licence"}}
+              </button>
             </div>
-            <button type="button" class="btn btn-default btn-small" disabled={{this.checking}} {{on "click" this.checkLicense}}>
-              {{if this.checking "Checking..." "Check Licence"}}
-            </button>
           </div>
         </div>
 
