@@ -33,9 +33,9 @@ export default class DwpDesign extends Component {
 
         <DwpAccordion @title="Colours" @open={{true}}>
           <DwpRow @title="Accent Colour" @desc="Primary accent across the landing page"><DwpField @type="color" @configKey="accent_color" @value={{this.val "accent_color"}} @onChange={{this.update}} /></DwpRow>
-          <DwpRow @title="Accent Hover Colour"><DwpField @type="color" @configKey="accent_hover_color" @value={{this.val "accent_hover_color"}} @onChange={{this.update}} /></DwpRow>
-          <DwpRow @title="Dark Background"><DwpField @type="color" @configKey="dark_bg_color" @value={{this.val "dark_bg_color"}} @onChange={{this.update}} /></DwpRow>
-          <DwpRow @title="Light Background"><DwpField @type="color" @configKey="light_bg_color" @value={{this.val "light_bg_color"}} @onChange={{this.update}} /></DwpRow>
+          <DwpRow @title="Accent Hover Colour" @desc="Colour when hovering over accent elements"><DwpField @type="color" @configKey="accent_hover_color" @value={{this.val "accent_hover_color"}} @onChange={{this.update}} /></DwpRow>
+          <DwpRow @title="Dark Background" @desc="Page background in dark mode"><DwpField @type="color" @configKey="dark_bg_color" @value={{this.val "dark_bg_color"}} @onChange={{this.update}} /></DwpRow>
+          <DwpRow @title="Light Background" @desc="Page background in light mode"><DwpField @type="color" @configKey="light_bg_color" @value={{this.val "light_bg_color"}} @onChange={{this.update}} /></DwpRow>
           <DwpRow @title="Orb Colour" @desc="Background orb gradient colour"><DwpField @type="color" @configKey="orb_color" @value={{this.val "orb_color"}} @onChange={{this.update}} /></DwpRow>
           <DwpRow @title="Orb Opacity" @desc="0-100"><DwpField @type="integer" @configKey="orb_opacity" @value={{this.val "orb_opacity"}} @min="0" @max="100" @onChange={{this.update}} /></DwpRow>
         </DwpAccordion>
@@ -47,7 +47,7 @@ export default class DwpDesign extends Component {
 
         <DwpAccordion @title="Logo">
           <DwpRow @title="Logo Height" @desc="16-80px"><DwpField @type="integer" @configKey="logo_height" @value={{this.val "logo_height"}} @min="16" @max="80" @onChange={{this.update}} /></DwpRow>
-          <DwpRow @title="Use Accent Colour"><DwpField @type="bool" @configKey="logo_use_accent_color" @value={{this.val "logo_use_accent_color"}} @onChange={{this.update}} /></DwpRow>
+          <DwpRow @title="Use Accent Colour" @desc="Tint the logo with the accent colour using a CSS mask"><DwpField @type="bool" @configKey="logo_use_accent_color" @value={{this.val "logo_use_accent_color"}} @onChange={{this.update}} /></DwpRow>
           <DwpUploadNote @fieldName="logo_dark, logo_light, footer_logo" />
         </DwpAccordion>
 
@@ -59,21 +59,21 @@ export default class DwpDesign extends Component {
               {{/each}}
             </div>
           </DwpRow>
-          <DwpRow @title="Staggered Reveal"><DwpField @type="bool" @configKey="staggered_reveal_enabled" @value={{this.val "staggered_reveal_enabled"}} @onChange={{this.update}} /></DwpRow>
-          <DwpRow @title="Dynamic Background"><DwpField @type="bool" @configKey="dynamic_background_enabled" @value={{this.val "dynamic_background_enabled"}} @onChange={{this.update}} /></DwpRow>
-          <DwpRow @title="Mouse Parallax"><DwpField @type="bool" @configKey="mouse_parallax_enabled" @value={{this.val "mouse_parallax_enabled"}} @onChange={{this.update}} /></DwpRow>
-          <DwpRow @title="Scroll Progress Bar"><DwpField @type="bool" @configKey="scroll_progress_enabled" @value={{this.val "scroll_progress_enabled"}} @onChange={{this.update}} /></DwpRow>
+          <DwpRow @title="Staggered Reveal" @desc="Animate cards and grid items in sequence instead of all at once"><DwpField @type="bool" @configKey="staggered_reveal_enabled" @value={{this.val "staggered_reveal_enabled"}} @onChange={{this.update}} /></DwpRow>
+          <DwpRow @title="Dynamic Background" @desc="Show floating gradient orbs behind the page content"><DwpField @type="bool" @configKey="dynamic_background_enabled" @value={{this.val "dynamic_background_enabled"}} @onChange={{this.update}} /></DwpRow>
+          <DwpRow @title="Mouse Parallax" @desc="Elements shift subtly as the cursor moves"><DwpField @type="bool" @configKey="mouse_parallax_enabled" @value={{this.val "mouse_parallax_enabled"}} @onChange={{this.update}} /></DwpRow>
+          <DwpRow @title="Scroll Progress Bar" @desc="Show a thin progress bar at the top of the navbar"><DwpField @type="bool" @configKey="scroll_progress_enabled" @value={{this.val "scroll_progress_enabled"}} @onChange={{this.update}} /></DwpRow>
         </DwpAccordion>
 
         <DwpAccordion @title="Preloader">
-          <DwpRow @title="Enable Preloader"><DwpField @type="bool" @configKey="preloader_enabled" @value={{this.val "preloader_enabled"}} @onChange={{this.update}} /></DwpRow>
+          <DwpRow @title="Enable Preloader" @desc="Show a loading screen with progress bar before the page appears"><DwpField @type="bool" @configKey="preloader_enabled" @value={{this.val "preloader_enabled"}} @onChange={{this.update}} /></DwpRow>
           <div class={{if this.preloaderDisabled "dwp-accordion__body--dimmed"}}>
-            <DwpRow @title="Min Duration (ms)"><DwpField @type="integer" @configKey="preloader_min_duration" @value={{this.val "preloader_min_duration"}} @min="0" @max="5000" @onChange={{this.update}} /></DwpRow>
-            <DwpRow @title="Bar Colour"><DwpField @type="color" @configKey="preloader_bar_color" @value={{this.val "preloader_bar_color"}} @onChange={{this.update}} /></DwpRow>
-            <DwpRow @title="Background Dark"><DwpField @type="color" @configKey="preloader_bg_dark" @value={{this.val "preloader_bg_dark"}} @onChange={{this.update}} /></DwpRow>
-            <DwpRow @title="Background Light"><DwpField @type="color" @configKey="preloader_bg_light" @value={{this.val "preloader_bg_light"}} @onChange={{this.update}} /></DwpRow>
-            <DwpRow @title="Text Colour Dark"><DwpField @type="color" @configKey="preloader_text_color_dark" @value={{this.val "preloader_text_color_dark"}} @onChange={{this.update}} /></DwpRow>
-            <DwpRow @title="Text Colour Light"><DwpField @type="color" @configKey="preloader_text_color_light" @value={{this.val "preloader_text_color_light"}} @onChange={{this.update}} /></DwpRow>
+            <DwpRow @title="Min Duration (ms)" @desc="Minimum time the preloader is shown, even if content loads faster"><DwpField @type="integer" @configKey="preloader_min_duration" @value={{this.val "preloader_min_duration"}} @min="0" @max="5000" @onChange={{this.update}} /></DwpRow>
+            <DwpRow @title="Bar Colour" @desc="Progress bar fill colour"><DwpField @type="color" @configKey="preloader_bar_color" @value={{this.val "preloader_bar_color"}} @onChange={{this.update}} /></DwpRow>
+            <DwpRow @title="Background Dark" @desc="Preloader screen background in dark mode"><DwpField @type="color" @configKey="preloader_bg_dark" @value={{this.val "preloader_bg_dark"}} @onChange={{this.update}} /></DwpRow>
+            <DwpRow @title="Background Light" @desc="Preloader screen background in light mode"><DwpField @type="color" @configKey="preloader_bg_light" @value={{this.val "preloader_bg_light"}} @onChange={{this.update}} /></DwpRow>
+            <DwpRow @title="Text Colour Dark" @desc="Percentage counter colour in dark mode"><DwpField @type="color" @configKey="preloader_text_color_dark" @value={{this.val "preloader_text_color_dark"}} @onChange={{this.update}} /></DwpRow>
+            <DwpRow @title="Text Colour Light" @desc="Percentage counter colour in light mode"><DwpField @type="color" @configKey="preloader_text_color_light" @value={{this.val "preloader_text_color_light"}} @onChange={{this.update}} /></DwpRow>
             <DwpUploadNote @fieldName="preloader_logo_dark, preloader_logo_light" />
           </div>
         </DwpAccordion>

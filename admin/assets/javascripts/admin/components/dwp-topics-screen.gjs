@@ -19,22 +19,22 @@ export default class DwpTopicsScreen extends Component {
     <div class="dwp-toggle-row"><span>Enable Topics</span><DwpField @type="bool" @configKey="topics_enabled" @value={{this.val "topics_enabled"}} @onChange={{this.update}} /></div>
 
     <DwpAccordion @title="Content" @open={{true}}>
-      <DwpRow @title="Title Enabled"><DwpField @type="bool" @configKey="topics_title_enabled" @value={{this.val "topics_title_enabled"}} @onChange={{this.update}} /></DwpRow>
-      <DwpRow @title="Title"><DwpField @type="string" @configKey="topics_title" @value={{this.val "topics_title"}} @onChange={{this.update}} /></DwpRow>
-      <DwpRow @title="Title Size (px)"><DwpField @type="integer" @configKey="topics_title_size" @value={{this.val "topics_title_size"}} @min="0" @max="80" @onChange={{this.update}} /></DwpRow>
-      <DwpRow @title="Topic Count"><DwpField @type="integer" @configKey="topics_count" @value={{this.val "topics_count"}} @onChange={{this.update}} /></DwpRow>
+      <DwpRow @title="Title Enabled" @desc="Show or hide the section heading"><DwpField @type="bool" @configKey="topics_title_enabled" @value={{this.val "topics_title_enabled"}} @onChange={{this.update}} /></DwpRow>
+      <DwpRow @title="Title" @desc="Heading text above the topic cards"><DwpField @type="string" @configKey="topics_title" @value={{this.val "topics_title"}} @onChange={{this.update}} /></DwpRow>
+      <DwpRow @title="Title Size (px)" @desc="Custom font size, 0 uses the default"><DwpField @type="integer" @configKey="topics_title_size" @value={{this.val "topics_title_size"}} @min="0" @max="80" @onChange={{this.update}} /></DwpRow>
+      <DwpRow @title="Topic Count" @desc="Number of trending topics to display"><DwpField @type="integer" @configKey="topics_count" @value={{this.val "topics_count"}} @onChange={{this.update}} /></DwpRow>
     </DwpAccordion>
 
     <DwpAccordion @title="Card Colours">
-      <DwpRow @title="Card BG (Dark)"><DwpField @type="color" @configKey="topics_card_bg_dark" @value={{this.val "topics_card_bg_dark"}} @onChange={{this.update}} /></DwpRow>
-      <DwpRow @title="Card BG (Light)"><DwpField @type="color" @configKey="topics_card_bg_light" @value={{this.val "topics_card_bg_light"}} @onChange={{this.update}} /></DwpRow>
+      <DwpRow @title="Card BG (Dark)" @desc="Topic card background in dark mode"><DwpField @type="color" @configKey="topics_card_bg_dark" @value={{this.val "topics_card_bg_dark"}} @onChange={{this.update}} /></DwpRow>
+      <DwpRow @title="Card BG (Light)" @desc="Topic card background in light mode"><DwpField @type="color" @configKey="topics_card_bg_light" @value={{this.val "topics_card_bg_light"}} @onChange={{this.update}} /></DwpRow>
     </DwpAccordion>
 
     <DwpAccordion @title="Section Styling">
-      <DwpRow @title="Background (Dark)"><DwpField @type="color" @configKey="topics_bg_dark" @value={{this.val "topics_bg_dark"}} @onChange={{this.update}} /></DwpRow>
-      <DwpRow @title="Background (Light)"><DwpField @type="color" @configKey="topics_bg_light" @value={{this.val "topics_bg_light"}} @onChange={{this.update}} /></DwpRow>
-      <DwpRow @title="Min Height"><DwpField @type="integer" @configKey="topics_min_height" @value={{this.val "topics_min_height"}} @min="0" @max="2000" @onChange={{this.update}} /></DwpRow>
-      <DwpRow @title="Border Style"><DwpField @type="enum" @configKey="topics_border_style" @value={{this.val "topics_border_style"}} @choices={{this.borderChoices}} @onChange={{this.update}} /></DwpRow>
+      <DwpRow @title="Background (Dark)" @desc="Section background in dark mode"><DwpField @type="color" @configKey="topics_bg_dark" @value={{this.val "topics_bg_dark"}} @onChange={{this.update}} /></DwpRow>
+      <DwpRow @title="Background (Light)" @desc="Section background in light mode"><DwpField @type="color" @configKey="topics_bg_light" @value={{this.val "topics_bg_light"}} @onChange={{this.update}} /></DwpRow>
+      <DwpRow @title="Min Height" @desc="Minimum section height in pixels, 0 for auto"><DwpField @type="integer" @configKey="topics_min_height" @value={{this.val "topics_min_height"}} @min="0" @max="2000" @onChange={{this.update}} /></DwpRow>
+      <DwpRow @title="Border Style" @desc="Bottom border separating this section from the next"><DwpField @type="enum" @configKey="topics_border_style" @value={{this.val "topics_border_style"}} @choices={{this.borderChoices}} @onChange={{this.update}} /></DwpRow>
     </DwpAccordion>
 
     <DwpSaveBar @saving={{this.c.saving}} @saved={{this.c.saved}} @onSave={{this.save}} />

@@ -32,21 +32,21 @@ module DomniqWebPage
 
     def self.upload_urls
       {
-        "og_image"             => url(SiteSetting.dwp_og_image),
-        "favicon"              => url(SiteSetting.dwp_favicon),
-        "logo_dark"            => url(SiteSetting.dwp_logo_dark),
-        "logo_light"           => url(SiteSetting.dwp_logo_light),
-        "footer_logo"          => url(SiteSetting.dwp_footer_logo),
-        "hero_bg_image"        => url(SiteSetting.dwp_hero_bg_image),
-        "hero_image"           => url(SiteSetting.dwp_hero_image),
-        "about_image"          => url(SiteSetting.dwp_about_image),
-        "about_bg_image"       => url(SiteSetting.dwp_about_bg_image),
-        "faq_image"            => url(SiteSetting.dwp_faq_image),
-        "cta_image"            => url(SiteSetting.dwp_cta_image),
-        "ios_badge_image"      => url(SiteSetting.dwp_ios_badge_image),
-        "android_badge_image"  => url(SiteSetting.dwp_android_badge_image),
-        "preloader_logo_dark"  => url(SiteSetting.dwp_preloader_logo_dark),
-        "preloader_logo_light" => url(SiteSetting.dwp_preloader_logo_light),
+        "og_image"             => url(SiteSetting.domniq_web_og_image),
+        "favicon"              => url(SiteSetting.domniq_web_favicon),
+        "logo_dark"            => url(SiteSetting.domniq_web_logo_dark),
+        "logo_light"           => url(SiteSetting.domniq_web_logo_light),
+        "footer_logo"          => url(SiteSetting.domniq_web_footer_logo),
+        "hero_bg_image"        => url(SiteSetting.domniq_web_hero_bg_image),
+        "hero_image"           => url(SiteSetting.domniq_web_hero_image),
+        "about_image"          => url(SiteSetting.domniq_web_about_image),
+        "about_bg_image"       => url(SiteSetting.domniq_web_about_bg_image),
+        "faq_image"            => url(SiteSetting.domniq_web_faq_image),
+        "cta_image"            => url(SiteSetting.domniq_web_cta_image),
+        "ios_badge_image"      => url(SiteSetting.domniq_web_ios_badge_image),
+        "android_badge_image"  => url(SiteSetting.domniq_web_android_badge_image),
+        "preloader_logo_dark"  => url(SiteSetting.domniq_web_preloader_logo_dark),
+        "preloader_logo_light" => url(SiteSetting.domniq_web_preloader_logo_light),
       }
     end
 

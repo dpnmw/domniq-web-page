@@ -5,7 +5,7 @@ module ::DomniqWebPage
   PLUGIN_DIR = File.expand_path("..", __dir__)
 
   def self.enabled?
-    SiteSetting.dwp_enabled
+    SiteSetting.domniq_web_enabled
   end
 end
 

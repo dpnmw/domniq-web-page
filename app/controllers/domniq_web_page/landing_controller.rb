@@ -65,7 +65,7 @@ module DomniqWebPage
     private
 
     def safe_to_render?
-      return false unless SiteSetting.dwp_enabled
+      return false unless SiteSetting.domniq_web_enabled
       return false unless defined?(DomniqWebPage::PageBuilder)
       return false unless ActiveRecord::Base.connection.active?
       true

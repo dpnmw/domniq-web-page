@@ -8,7 +8,7 @@ module DomniqWebPage
     def self.safe_to_load?
       defined?(DomniqWebPage::PageBuilder) &&
         defined?(DomniqWebPage::ConfigBuilder) &&
-        SiteSetting.respond_to?(:dwp_enabled)
+        SiteSetting.respond_to?(:domniq_web_enabled)
     rescue
       false
     end

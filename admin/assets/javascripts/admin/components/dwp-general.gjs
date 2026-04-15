@@ -25,7 +25,7 @@ export default class DwpGeneral extends Component {
           <div class="dwp-card__body">
             <h3 class="dwp-card__heading">Plugin Status</h3>
             <DwpRow @title="Plugin Enabled" @desc="Master switch — also accessible in the Settings tab">
-              <a href="/admin/site_settings?filter=dwp" class="btn btn-default btn-small">Open Settings</a>
+              <a href="/admin/plugins/domniq-web-page" class="btn btn-default btn-small">Open Settings</a>
             </DwpRow>
             <DwpRow @title="Section Order" @desc="Order of sections on the landing page (pipe-separated)">
               <DwpField @type="string" @configKey="section_order" @value={{this.val "section_order"}} @onChange={{this.update}} />

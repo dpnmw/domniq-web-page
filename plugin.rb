@@ -6,7 +6,7 @@
 # authors: DPN MEDiA WORKS
 # url: https://domniq.app
 
-enabled_site_setting :dwp_enabled
+enabled_site_setting :domniq_web_enabled
 
 register_asset "stylesheets/common/dwp-admin.scss", :admin
 
@@ -29,7 +29,7 @@ after_initialize do
 
   unless defined?(DomniqWebPage::PageBuilder) &&
          defined?(DomniqWebPage::ConfigBuilder) &&
-         SiteSetting.respond_to?(:dwp_enabled)
+         SiteSetting.respond_to?(:domniq_web_enabled)
     Rails.logger.error("[DWP] Critical dependency missing — skipping route registration.")
     next
   end
@@ -42,7 +42,7 @@ after_initialize do
          constraints: ->(req) {
            begin
              !CurrentUser.lookup_from_env(req.env) &&
-               SiteSetting.dwp_enabled
+               SiteSetting.domniq_web_enabled
            rescue => e
              Rails.logger.error("[DWP] Route constraint error: #{e.message}")
              false

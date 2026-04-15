@@ -22,8 +22,8 @@ export default class DwpFooter extends Component {
       </:icon>
       <:content>
         <DwpAccordion @title="Content" @open={{true}}>
-          <DwpRow @title="Footer Description"><DwpField @type="string" @configKey="footer_description" @value={{this.val "footer_description"}} @onChange={{this.update}} /></DwpRow>
-          <DwpRow @title="Footer Text"><DwpField @type="text_area" @configKey="footer_text" @value={{this.val "footer_text"}} @onChange={{this.update}} /></DwpRow>
+          <DwpRow @title="Footer Description" @desc="Short description shown above the footer links"><DwpField @type="string" @configKey="footer_description" @value={{this.val "footer_description"}} @onChange={{this.update}} /></DwpRow>
+          <DwpRow @title="Footer Text" @desc="Additional text or HTML displayed below the footer links"><DwpField @type="text_area" @configKey="footer_text" @value={{this.val "footer_text"}} @onChange={{this.update}} /></DwpRow>
           <DwpRow @title="Footer Links" @desc="Add or remove navigation links">
             <DwpListEditor @value={{this.val "footer_links"}} @configKey="footer_links" @fields={{this.linkFields}} @onChange={{this.update}} />
           </DwpRow>
@@ -31,11 +31,11 @@ export default class DwpFooter extends Component {
         </DwpAccordion>
 
         <DwpAccordion @title="Appearance">
-          <DwpRow @title="Border Style"><DwpField @type="enum" @configKey="footer_border_style" @value={{this.val "footer_border_style"}} @choices={{this.borderChoices}} @onChange={{this.update}} /></DwpRow>
-          <DwpRow @title="Background (Dark)"><DwpField @type="color" @configKey="footer_bg_dark" @value={{this.val "footer_bg_dark"}} @onChange={{this.update}} /></DwpRow>
-          <DwpRow @title="Background (Light)"><DwpField @type="color" @configKey="footer_bg_light" @value={{this.val "footer_bg_light"}} @onChange={{this.update}} /></DwpRow>
-          <DwpRow @title="Text Colour (Dark)"><DwpField @type="color" @configKey="footer_text_color_dark" @value={{this.val "footer_text_color_dark"}} @onChange={{this.update}} /></DwpRow>
-          <DwpRow @title="Text Colour (Light)"><DwpField @type="color" @configKey="footer_text_color_light" @value={{this.val "footer_text_color_light"}} @onChange={{this.update}} /></DwpRow>
+          <DwpRow @title="Border Style" @desc="Top border line separating the footer from content"><DwpField @type="enum" @configKey="footer_border_style" @value={{this.val "footer_border_style"}} @choices={{this.borderChoices}} @onChange={{this.update}} /></DwpRow>
+          <DwpRow @title="Background (Dark)" @desc="Footer background in dark mode"><DwpField @type="color" @configKey="footer_bg_dark" @value={{this.val "footer_bg_dark"}} @onChange={{this.update}} /></DwpRow>
+          <DwpRow @title="Background (Light)" @desc="Footer background in light mode"><DwpField @type="color" @configKey="footer_bg_light" @value={{this.val "footer_bg_light"}} @onChange={{this.update}} /></DwpRow>
+          <DwpRow @title="Text Colour (Dark)" @desc="Footer text and link colour in dark mode"><DwpField @type="color" @configKey="footer_text_color_dark" @value={{this.val "footer_text_color_dark"}} @onChange={{this.update}} /></DwpRow>
+          <DwpRow @title="Text Colour (Light)" @desc="Footer text and link colour in light mode"><DwpField @type="color" @configKey="footer_text_color_light" @value={{this.val "footer_text_color_light"}} @onChange={{this.update}} /></DwpRow>
         </DwpAccordion>
 
         <DwpSaveBar @saving={{this.controller.saving}} @saved={{this.controller.saved}} @onSave={{this.controller.save}} />

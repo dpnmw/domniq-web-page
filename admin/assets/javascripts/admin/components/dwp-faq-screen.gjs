@@ -20,9 +20,9 @@ export default class DwpFaqScreen extends Component {
     <div class="dwp-toggle-row"><span>Enable FAQ</span><DwpField @type="bool" @configKey="faq_enabled" @value={{this.val "faq_enabled"}} @onChange={{this.update}} /></div>
 
     <DwpAccordion @title="Content" @open={{true}}>
-      <DwpRow @title="Title Enabled"><DwpField @type="bool" @configKey="faq_title_enabled" @value={{this.val "faq_title_enabled"}} @onChange={{this.update}} /></DwpRow>
-      <DwpRow @title="Title"><DwpField @type="string" @configKey="faq_title" @value={{this.val "faq_title"}} @onChange={{this.update}} /></DwpRow>
-      <DwpRow @title="Title Size (px)"><DwpField @type="integer" @configKey="faq_title_size" @value={{this.val "faq_title_size"}} @min="0" @max="80" @onChange={{this.update}} /></DwpRow>
+      <DwpRow @title="Title Enabled" @desc="Show or hide the section heading"><DwpField @type="bool" @configKey="faq_title_enabled" @value={{this.val "faq_title_enabled"}} @onChange={{this.update}} /></DwpRow>
+      <DwpRow @title="Title" @desc="Heading text above the FAQ accordion"><DwpField @type="string" @configKey="faq_title" @value={{this.val "faq_title"}} @onChange={{this.update}} /></DwpRow>
+      <DwpRow @title="Title Size (px)" @desc="Custom font size, 0 uses the default"><DwpField @type="integer" @configKey="faq_title_size" @value={{this.val "faq_title_size"}} @min="0" @max="80" @onChange={{this.update}} /></DwpRow>
     </DwpAccordion>
 
     <DwpAccordion @title="FAQ Items">
@@ -34,15 +34,15 @@ export default class DwpFaqScreen extends Component {
     </DwpAccordion>
 
     <DwpAccordion @title="Card Colours">
-      <DwpRow @title="Card BG (Dark)"><DwpField @type="color" @configKey="faq_card_bg_dark" @value={{this.val "faq_card_bg_dark"}} @onChange={{this.update}} /></DwpRow>
-      <DwpRow @title="Card BG (Light)"><DwpField @type="color" @configKey="faq_card_bg_light" @value={{this.val "faq_card_bg_light"}} @onChange={{this.update}} /></DwpRow>
+      <DwpRow @title="Card BG (Dark)" @desc="FAQ card background in dark mode"><DwpField @type="color" @configKey="faq_card_bg_dark" @value={{this.val "faq_card_bg_dark"}} @onChange={{this.update}} /></DwpRow>
+      <DwpRow @title="Card BG (Light)" @desc="FAQ card background in light mode"><DwpField @type="color" @configKey="faq_card_bg_light" @value={{this.val "faq_card_bg_light"}} @onChange={{this.update}} /></DwpRow>
     </DwpAccordion>
 
     <DwpAccordion @title="Section Styling">
-      <DwpRow @title="Background (Dark)"><DwpField @type="color" @configKey="faq_bg_dark" @value={{this.val "faq_bg_dark"}} @onChange={{this.update}} /></DwpRow>
-      <DwpRow @title="Background (Light)"><DwpField @type="color" @configKey="faq_bg_light" @value={{this.val "faq_bg_light"}} @onChange={{this.update}} /></DwpRow>
-      <DwpRow @title="Min Height"><DwpField @type="integer" @configKey="faq_min_height" @value={{this.val "faq_min_height"}} @min="0" @max="800" @onChange={{this.update}} /></DwpRow>
-      <DwpRow @title="Mobile Max Height"><DwpField @type="integer" @configKey="faq_mobile_max_height" @value={{this.val "faq_mobile_max_height"}} @min="0" @max="1200" @onChange={{this.update}} /></DwpRow>
+      <DwpRow @title="Background (Dark)" @desc="Section background in dark mode"><DwpField @type="color" @configKey="faq_bg_dark" @value={{this.val "faq_bg_dark"}} @onChange={{this.update}} /></DwpRow>
+      <DwpRow @title="Background (Light)" @desc="Section background in light mode"><DwpField @type="color" @configKey="faq_bg_light" @value={{this.val "faq_bg_light"}} @onChange={{this.update}} /></DwpRow>
+      <DwpRow @title="Min Height" @desc="Minimum section height in pixels, 0 for auto"><DwpField @type="integer" @configKey="faq_min_height" @value={{this.val "faq_min_height"}} @min="0" @max="800" @onChange={{this.update}} /></DwpRow>
+      <DwpRow @title="Mobile Max Height" @desc="Limit FAQ height on mobile screens to enable scrolling"><DwpField @type="integer" @configKey="faq_mobile_max_height" @value={{this.val "faq_mobile_max_height"}} @min="0" @max="1200" @onChange={{this.update}} /></DwpRow>
     </DwpAccordion>
 
     <DwpSaveBar @saving={{this.c.saving}} @saved={{this.c.saved}} @onSave={{this.save}} />
