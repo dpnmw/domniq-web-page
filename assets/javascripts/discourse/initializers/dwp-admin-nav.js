@@ -13,7 +13,7 @@ export default {
         { label: "dwp.admin.sections_title", route: "adminPlugins.show.dwp-sections" },
         { label: "dwp.admin.navbar_title",   route: "adminPlugins.show.dwp-navbar"   },
         { label: "dwp.admin.footer_title",   route: "adminPlugins.show.dwp-footer"   },
-        { label: "dwp.admin.support_title",  route: "adminPlugins.show.dwp-support"  },
+        { label: "dwp.admin.support_title",  route: "adminPlugins.show.dwp-premium"  },
       ]);
     });
   },

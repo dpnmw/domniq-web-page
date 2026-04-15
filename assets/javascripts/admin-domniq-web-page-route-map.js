@@ -8,6 +8,6 @@ export default {
     this.route("dwp-sections");
     this.route("dwp-navbar");
     this.route("dwp-footer");
-    this.route("dwp-support");
+    this.route("dwp-premium");
   },
 };

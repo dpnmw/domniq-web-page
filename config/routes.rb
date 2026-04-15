@@ -12,7 +12,7 @@ Discourse::Application.routes.draw do
       get "/dwp-sections"  => "domniq_web_page/admin#index"
       get "/dwp-navbar"    => "domniq_web_page/admin#index"
       get "/dwp-footer"    => "domniq_web_page/admin#index"
-      get "/dwp-support"   => "domniq_web_page/admin#index"
+      get "/dwp-premium"   => "domniq_web_page/admin#index"
     end
 
     scope format: :json do
