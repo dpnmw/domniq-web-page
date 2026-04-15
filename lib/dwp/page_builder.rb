@@ -903,49 +903,20 @@ module DomniqWebPage
       parsed[3] == :after ? "#{label} #{icon}" : "#{icon} #{label}"
     end
 
-    # ── CSS & JS assets (minified and cached) ──
+    # ── CSS & JS assets ──
 
     def landing_css
-      @@cached_css ||= begin
-        css_path = File.join(DomniqWebPage::PLUGIN_DIR, "assets", "stylesheets", "dwp", "landing.css")
-        raw = File.read(css_path)
-        minify_css(raw)
-      rescue Errno::ENOENT
-        ""
-      end
+      css_path = File.join(DomniqWebPage::PLUGIN_DIR, "assets", "stylesheets", "dwp", "landing.css")
+      File.read(css_path)
+    rescue Errno::ENOENT
+      ""
     end
 
     def landing_js
-      @@cached_js ||= begin
-        js_path = File.join(DomniqWebPage::PLUGIN_DIR, "assets", "javascripts", "dwp", "landing.js")
-        raw = File.read(js_path)
-        minify_js(raw)
-      rescue Errno::ENOENT
-        ""
-      end
-    end
-
-    def minify_css(css)
-      css = css.gsub(%r{/\*.*?\*/}m, "")        # remove block comments
-      css = css.gsub(%r{//[^\n]*}, "")           # remove line comments
-      css = css.gsub(/\s*\n\s*/, "\n")           # collapse blank lines
-      css = css.gsub(/\n+/, "\n")                # multiple newlines → one
-      css = css.gsub(/:\s+/, ":")                # space after colon
-      css = css.gsub(/;\s+/, ";")                # space after semicolon
-      css = css.gsub(/\s*\{\s*/, "{")            # space around {
-      css = css.gsub(/\s*\}\s*/, "}")            # space around }
-      css = css.gsub(/\s*,\s*/, ",")             # space around comma
-      css = css.gsub(/;\}/, "}")                 # remove trailing semicolons
-      css.strip
-    end
-
-    def minify_js(js)
-      js = js.gsub(%r{/\*.*?\*/}m, "")           # remove block comments
-      js = js.gsub(%r{(?<![:"'])//[^\n]*}, "")   # remove line comments (not in strings)
-      js = js.gsub(/[ \t]+/, " ")                # collapse horizontal whitespace
-      js = js.gsub(/\n\s*\n+/, "\n")             # collapse blank lines
-      js = js.gsub(/\n\s*/, "\n")                # trim leading whitespace on lines
-      js.strip
+      js_path = File.join(DomniqWebPage::PLUGIN_DIR, "assets", "javascripts", "dwp", "landing.js")
+      File.read(js_path)
+    rescue Errno::ENOENT
+      ""
     end
   end
 end
