@@ -4,6 +4,10 @@ plugins:
     type: bool
     client: true
 
+  domniq_web_license_key:
+    default: ""
+    type: string
+
   domniq_web_og_image:
     default: ""
     type: upload

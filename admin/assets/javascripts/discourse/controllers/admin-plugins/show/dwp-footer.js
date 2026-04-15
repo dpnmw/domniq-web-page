@@ -10,6 +10,21 @@ export default class DwpFooterController extends Controller {
   @tracked saving = false;
   @tracked saved = false;
   @tracked localConfigs = null;
+  @tracked isLocked = true;
+
+  constructor() {
+    super(...arguments);
+    this._fetchLicense();
+  }
+
+  async _fetchLicense() {
+    try {
+      const result = await ajax("/admin/plugins/domniq-web-page/license/status.json");
+      this.isLocked = !result.licensed;
+    } catch {
+      this.isLocked = true;
+    }
+  }
 
   get configs() {
     return this.localConfigs ?? this.model?.configs ?? [];

@@ -856,6 +856,54 @@
   }
 }
 
+// ── Card Description ──
+
+.dwp-card__desc {
+  margin: 0 0 0.75rem;
+  font-size: 0.8rem;
+  color: var(--primary-medium);
+  line-height: 1.5;
+}
+
+// ── CSS Reference Viewer ──
+
+.dwp-css-ref {
+  margin-top: 0.75rem;
+}
+
+.dwp-css-ref__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--tertiary);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.dwp-css-ref__code {
+  margin: 0.5rem 0 0;
+  padding: 1rem;
+  border-radius: 10px;
+  background: var(--primary-very-low);
+  border: 1px solid var(--primary-low);
+  font-family: monospace;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--primary-medium);
+  max-height: 400px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
 // ── Font Field ──
 
 .dwp-font-field {
@@ -1161,5 +1209,139 @@
 
   .dwp-support__link:hover & {
     transform: translateX(3px);
+  }
+}
+
+// ── Licence Lock Overlay ──
+
+.dwp-license-lock {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: inherit;
+}
+
+.dwp-license-lock__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.dwp-license-lock__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+
+  svg {
+    width: 22px;
+    height: 22px;
+    color: #fff;
+  }
+}
+
+.dwp-license-lock__text {
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.dwp-license-lock__btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 1.25rem;
+  border-radius: 8px;
+  background: #2b6aff;
+  color: #fff !important;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  box-shadow: 0 2px 8px rgba(43, 106, 255, 0.35);
+
+  &:hover {
+    background: #1d5ae0;
+    transform: translateY(-1px);
+    color: #fff !important;
+    text-decoration: none;
+  }
+}
+
+// Accordion body lock — shows content blurred with overlay
+.dwp-accordion__body-locked {
+  position: relative;
+  min-height: 120px;
+
+  > *:not(.dwp-license-lock) {
+    filter: blur(4px);
+    opacity: 0.5;
+    pointer-events: none;
+    user-select: none;
+  }
+}
+
+// Accordion lock badge next to title
+.dwp-accordion__lock-badge {
+  display: inline-flex;
+  padding: 0.12rem 0.5rem;
+  border-radius: 20px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: rgba(43, 106, 255, 0.1);
+  color: #2b6aff;
+  margin-left: 0.5rem;
+}
+
+// Card-level lock — for dwp-card blocks (General tab)
+.dwp-card--locked {
+  position: relative;
+  overflow: hidden;
+
+  .dwp-card__body {
+    filter: blur(4px);
+    opacity: 0.5;
+    pointer-events: none;
+    user-select: none;
+  }
+}
+
+// Section card lock — full overlay on grid cards
+.dwp-section-card--locked {
+  cursor: not-allowed;
+  position: relative;
+
+  &:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .dwp-section-card__icon,
+  .dwp-section-card__label,
+  .dwp-section-card__desc,
+  .dwp-section-card__badge {
+    filter: blur(3px);
+    opacity: 0.4;
+    pointer-events: none;
+    user-select: none;
   }
 }

@@ -1,16 +1,23 @@
 import Component from "@glimmer/component";
+import { tracked } from "@glimmer/tracking";
+import { action } from "@ember/object";
 import { fn } from "@ember/helper";
 import { on } from "@ember/modifier";
+import { ajax } from "discourse/lib/ajax";
 import DwpPageLayout from "./dwp-page-layout";
 import DwpRow from "./dwp-row";
 import DwpField from "./dwp-field";
 import DwpUploadNote from "./dwp-upload-note";
 import DwpSaveBar from "./dwp-save-bar";
 import DwpSortOrder from "./dwp-sort-order";
+import DwpLicenseLock from "./dwp-license-lock";
 import { htmlSafe } from "@ember/template";
 import { getIcon } from "./dwp-icons";
 
 export default class DwpGeneral extends Component {
+  @tracked showCurrentCss = false;
+  @tracked currentCss = null;
+
   get controller() { return this.args.controller; }
 
   val = (key) => this.controller.getValue(key);
@@ -18,6 +25,23 @@ export default class DwpGeneral extends Component {
   update = (key, value) => this.controller.updateValue(key, value);
 
   iconHtml = (name) => htmlSafe(getIcon(name));
+
+  @action
+  async toggleCurrentCss() {
+    if (this.showCurrentCss) {
+      this.showCurrentCss = false;
+      return;
+    }
+    if (!this.currentCss) {
+      try {
+        const result = await ajax("/admin/plugins/domniq-web-page/landing-css.json");
+        this.currentCss = result.css;
+      } catch {
+        this.currentCss = "/* Failed to load CSS */";
+      }
+    }
+    this.showCurrentCss = true;
+  }
 
   <template>
     <DwpPageLayout @titleLabel="dwp.admin.general_title" @descriptionLabel="dwp.admin.general_description">
@@ -51,7 +75,7 @@ export default class DwpGeneral extends Component {
           </div>
         </div>
 
-        <div class="dwp-card dwp-card--features">
+        <div class="dwp-card dwp-card--features {{if this.controller.isLocked 'dwp-card--locked'}}">
           <div class="dwp-card__body">
             <h3 class="dwp-card__heading"><span class="dwp-card__heading-icon">{{this.iconHtml "bolt"}}</span>Icons</h3>
             <DwpRow @title="Icon Library" @desc="Choose an icon set for buttons, titles, and stat labels">
@@ -72,13 +96,24 @@ export default class DwpGeneral extends Component {
               </div>
             </div>
           </div>
+          {{#if this.controller.isLocked}}<DwpLicenseLock />{{/if}}
         </div>
 
-        <div class="dwp-card dwp-card--support">
+        <div class="dwp-card dwp-card--support {{if this.controller.isLocked 'dwp-card--locked'}}">
           <div class="dwp-card__body">
             <h3 class="dwp-card__heading"><span class="dwp-card__heading-icon">{{this.iconHtml "code"}}</span>Custom CSS</h3>
+            <p class="dwp-card__desc">Add custom CSS to override the landing page styles. This is injected last so it takes priority over all built-in styles.</p>
             <textarea class="dwp-field__input dwp-field__textarea dwp-field__textarea--mono dwp-field__textarea--full" {{on "input" this.handleCssInput}}>{{this.val "custom_css"}}</textarea>
+            <div class="dwp-css-ref">
+              <button type="button" class="dwp-css-ref__toggle" {{on "click" this.toggleCurrentCss}}>
+                {{if this.showCurrentCss "Hide" "View"}} current landing page CSS
+              </button>
+              {{#if this.showCurrentCss}}
+                <pre class="dwp-css-ref__code">{{this.currentCss}}</pre>
+              {{/if}}
+            </div>
           </div>
+          {{#if this.controller.isLocked}}<DwpLicenseLock />{{/if}}
         </div>
 
         <DwpSaveBar @saving={{this.controller.saving}} @saved={{this.controller.saved}} @onSave={{this.controller.save}} />

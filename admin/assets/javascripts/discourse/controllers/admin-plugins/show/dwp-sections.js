@@ -11,6 +11,21 @@ export default class DwpSectionsController extends Controller {
   @tracked saving = false;
   @tracked saved = false;
   @tracked localConfigs = {};
+  @tracked isLocked = true;
+
+  constructor() {
+    super(...arguments);
+    this._fetchLicense();
+  }
+
+  async _fetchLicense() {
+    try {
+      const result = await ajax("/admin/plugins/domniq-web-page/license/status.json");
+      this.isLocked = !result.licensed;
+    } catch {
+      this.isLocked = true;
+    }
+  }
 
   getConfigs(type) {
     return this.localConfigs[type] ?? this.model?.configs?.[type] ?? [];
@@ -22,6 +37,7 @@ export default class DwpSectionsController extends Controller {
 
   @action
   updateValue(type, key, value) {
+    if (this.isSectionLocked(type)) return;
     this.localConfigs = {
       ...this.localConfigs,
       [type]: this.getConfigs(type).map((c) =>
@@ -31,11 +47,22 @@ export default class DwpSectionsController extends Controller {
     this.saved = false;
   }
 
-  @action openSection(section)  { this.activeSection = section; this.saved = false; }
+  static LOCKED_SECTIONS = ["stats", "about", "leaderboard", "topics", "faq", "app_cta"];
+
+  isSectionLocked(section) {
+    return this.isLocked && DwpSectionsController.LOCKED_SECTIONS.includes(section);
+  }
+
+  @action openSection(section)  {
+    if (this.isSectionLocked(section)) return;
+    this.activeSection = section;
+    this.saved = false;
+  }
   @action closeSection()        { this.activeSection = null; }
 
   @action
   async save(type) {
+    if (this.isSectionLocked(type)) return;
     this.saving = true;
     this.saved = false;
     try {

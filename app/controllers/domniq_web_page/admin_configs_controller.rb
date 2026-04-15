@@ -16,6 +16,14 @@ module DomniqWebPage
       type = params[:config_type]
       raise Discourse::NotFound unless allowed_types.include?(type)
 
+      # Server-side license enforcement — reject writes to locked config types/keys
+      if defined?(DomniqWebPage::LicenseChecker)
+        if DomniqWebPage::LicenseChecker.config_locked?(type)
+          render json: { errors: ["This section requires a valid licence."] }, status: :forbidden
+          return
+        end
+      end
+
       known_keys = Config.for_type(type).pluck(:config_key).to_set
 
       errors = []
@@ -25,6 +33,13 @@ module DomniqWebPage
         # Reject keys that were not seeded — prevents arbitrary key injection
         unless known_keys.include?(key_str)
           errors << "#{key_str}: unknown config key"
+          next
+        end
+
+        # Reject individual locked keys within partially locked types
+        if defined?(DomniqWebPage::LicenseChecker) &&
+           DomniqWebPage::LicenseChecker.config_locked?(type, key_str)
+          errors << "#{key_str}: requires a valid licence"
           next
         end
 

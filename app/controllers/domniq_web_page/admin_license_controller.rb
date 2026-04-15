@@ -5,17 +5,27 @@ module DomniqWebPage
     requires_plugin DomniqWebPage::PLUGIN_NAME
 
     def status
-      checker = defined?(DomniqWebPage::LicenseChecker) ? DomniqWebPage::LicenseChecker : nil
-      render json: {
-        licensed:    checker&.licensed?    || false,
-        license_key: checker&.license_key_masked,
-        expires_at:  checker&.expires_at,
-      }
+      result = DomniqWebPage::LicenseChecker.check
+      render json: license_json(result)
     end
 
     def check
-      checker = defined?(DomniqWebPage::LicenseChecker) ? DomniqWebPage::LicenseChecker : nil
-      render json: checker&.check || { licensed: false, error: "License checker not available." }
+      result = DomniqWebPage::LicenseChecker.check(force: true)
+      render json: license_json(result)
+    end
+
+    private
+
+    def license_json(result)
+      {
+        licensed: result["license_active"] == true,
+        domain: result["domain"],
+        email: result["email"],
+        paid_at: result["paid_at"],
+        expires_at: result["expires_at"],
+        last_checked: result["checked_at"],
+        license_key: DomniqWebPage::LicenseChecker.license_key_masked,
+      }
     end
   end
 end

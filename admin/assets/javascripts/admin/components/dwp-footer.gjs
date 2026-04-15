@@ -30,7 +30,7 @@ export default class DwpFooter extends Component {
           <DwpUploadNote @fieldName="footer_logo" />
         </DwpAccordion>
 
-        <DwpAccordion @title="Appearance" @icon="brush">
+        <DwpAccordion @title="Appearance" @icon="brush" @locked={{this.controller.isLocked}}>
           <DwpRow @title="Border Style" @desc="Top border line separating the footer from content"><DwpField @type="enum" @configKey="footer_border_style" @value={{this.val "footer_border_style"}} @choices={{this.borderChoices}} @onChange={{this.update}} /></DwpRow>
           <DwpRow @title="Background (Dark)" @desc="Footer background in dark mode"><DwpField @type="color" @configKey="footer_bg_dark" @value={{this.val "footer_bg_dark"}} @onChange={{this.update}} /></DwpRow>
           <DwpRow @title="Background (Light)" @desc="Footer background in light mode"><DwpField @type="color" @configKey="footer_bg_light" @value={{this.val "footer_bg_light"}} @onChange={{this.update}} /></DwpRow>

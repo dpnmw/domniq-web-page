@@ -29,7 +29,7 @@ export default class DwpNavbar extends Component {
           <DwpRow @title="Join Colour (Light)" @desc="Button background colour in light mode"><DwpField @type="color" @configKey="navbar_join_color_light" @value={{this.val "navbar_join_color_light"}} @onChange={{this.update}} /></DwpRow>
         </DwpAccordion>
 
-        <DwpAccordion @title="Appearance" @icon="brush">
+        <DwpAccordion @title="Appearance" @icon="brush" @locked={{this.controller.isLocked}}>
           <DwpRow @title="Background Colour" @desc="Override the navbar background colour"><DwpField @type="color" @configKey="navbar_bg_color" @value={{this.val "navbar_bg_color"}} @onChange={{this.update}} /></DwpRow>
           <DwpRow @title="Border Style" @desc="Bottom border line of the navigation bar"><DwpField @type="enum" @configKey="navbar_border_style" @value={{this.val "navbar_border_style"}} @choices={{this.borderChoices}} @onChange={{this.update}} /></DwpRow>
           <DwpRow @title="Text Colour (Dark)" @desc="Navbar link text in dark mode"><DwpField @type="color" @configKey="navbar_text_color_dark" @value={{this.val "navbar_text_color_dark"}} @onChange={{this.update}} /></DwpRow>
@@ -38,7 +38,7 @@ export default class DwpNavbar extends Component {
           <DwpRow @title="Icon Colour (Light)" @desc="Social and theme toggle icons in light mode"><DwpField @type="color" @configKey="navbar_icon_color_light" @value={{this.val "navbar_icon_color_light"}} @onChange={{this.update}} /></DwpRow>
         </DwpAccordion>
 
-        <DwpAccordion @title="Social Links" @icon="share">
+        <DwpAccordion @title="Social Links" @icon="share" @locked={{this.controller.isLocked}}>
           <DwpRow @title="Twitter / X" @desc="Full URL to your Twitter or X profile"><DwpField @type="string" @configKey="social_twitter_url" @value={{this.val "social_twitter_url"}} @onChange={{this.update}} /></DwpRow>
           <DwpRow @title="Facebook" @desc="Full URL to your Facebook page"><DwpField @type="string" @configKey="social_facebook_url" @value={{this.val "social_facebook_url"}} @onChange={{this.update}} /></DwpRow>
           <DwpRow @title="Instagram" @desc="Full URL to your Instagram profile"><DwpField @type="string" @configKey="social_instagram_url" @value={{this.val "social_instagram_url"}} @onChange={{this.update}} /></DwpRow>

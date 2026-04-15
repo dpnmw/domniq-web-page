@@ -40,10 +40,7 @@ after_initialize do
   require_relative "lib/dwp/style_builder"
   require_relative "lib/dwp/page_builder"
 
-  begin
-    require_relative "premium/license_checker"
-  rescue LoadError
-  end
+  require_relative "lib/dwp/license_checker"
 
   unless defined?(DomniqWebPage::PageBuilder) &&
          defined?(DomniqWebPage::ConfigBuilder) &&

@@ -2,6 +2,7 @@ import Component from "@glimmer/component";
 import { on } from "@ember/modifier";
 import { htmlSafe } from "@ember/template";
 import { getIcon } from "./dwp-icons";
+import DwpLicenseLock from "./dwp-license-lock";
 
 export default class DwpSectionCard extends Component {
   get iconHtml() {
@@ -10,7 +11,7 @@ export default class DwpSectionCard extends Component {
   }
 
   <template>
-    <button class="dwp-section-card {{@colorClass}}" type="button" {{on "click" @onClick}}>
+    <button class="dwp-section-card {{@colorClass}} {{if @locked 'dwp-section-card--locked'}}" type="button" {{on "click" @onClick}} disabled={{@locked}}>
       {{#if this.iconHtml}}
         <span class="dwp-section-card__icon">{{this.iconHtml}}</span>
       {{/if}}
@@ -21,6 +22,9 @@ export default class DwpSectionCard extends Component {
       <span class="dwp-section-card__badge {{if @enabled 'dwp-section-card__badge--on' 'dwp-section-card__badge--off'}}">
         {{if @enabled "Enabled" "Disabled"}}
       </span>
+      {{#if @locked}}
+        <DwpLicenseLock />
+      {{/if}}
     </button>
   </template>
 }

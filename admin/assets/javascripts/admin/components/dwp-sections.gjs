@@ -41,12 +41,12 @@ export default class DwpSections extends Component {
         {{else}}
           <div class="dwp-sections-grid">
             <DwpSectionCard @label="Hero" @desc="Title, buttons, background, and contributors" @icon="hero" @colorClass="dwp-card--branding" @enabled={{true}} @onClick={{fn this.controller.openSection "hero"}} />
-            <DwpSectionCard @label="Stats" @desc="Animated counters for community metrics" @icon="stats" @colorClass="dwp-card--features" @enabled={{this.isEnabled "stats" "stats_enabled"}} @onClick={{fn this.controller.openSection "stats"}} />
-            <DwpSectionCard @label="About" @desc="Community description with image and quote" @icon="about" @colorClass="dwp-card--community" @enabled={{this.isEnabled "about" "about_enabled"}} @onClick={{fn this.controller.openSection "about"}} />
-            <DwpSectionCard @label="Leaderboard" @desc="Top contributors with bios and stats" @icon="leaderboard" @colorClass="dwp-card--playground" @enabled={{this.isEnabled "leaderboard" "leaderboard_enabled"}} @onClick={{fn this.controller.openSection "leaderboard"}} />
-            <DwpSectionCard @label="Topics" @desc="Trending discussions with engagement data" @icon="topics" @colorClass="dwp-card--settings" @enabled={{this.isEnabled "topics" "topics_enabled"}} @onClick={{fn this.controller.openSection "topics"}} />
-            <DwpSectionCard @label="FAQ" @desc="Accordion Q&A with optional image" @icon="faq" @colorClass="dwp-card--support" @enabled={{this.isEnabled "faq" "faq_enabled"}} @onClick={{fn this.controller.openSection "faq"}} />
-            <DwpSectionCard @label="App CTA" @desc="App download badges and gradient background" @icon="appcta" @colorClass="dwp-card--admin" @enabled={{this.isEnabled "app_cta" "show_app_ctas"}} @onClick={{fn this.controller.openSection "app_cta"}} />
+            <DwpSectionCard @label="Stats" @desc="Animated counters for community metrics" @icon="stats" @colorClass="dwp-card--features" @enabled={{this.isEnabled "stats" "stats_enabled"}} @onClick={{fn this.controller.openSection "stats"}} @locked={{this.controller.isLocked}} />
+            <DwpSectionCard @label="About" @desc="Community description with image and quote" @icon="about" @colorClass="dwp-card--community" @enabled={{this.isEnabled "about" "about_enabled"}} @onClick={{fn this.controller.openSection "about"}} @locked={{this.controller.isLocked}} />
+            <DwpSectionCard @label="Leaderboard" @desc="Top contributors with bios and stats" @icon="leaderboard" @colorClass="dwp-card--playground" @enabled={{this.isEnabled "leaderboard" "leaderboard_enabled"}} @onClick={{fn this.controller.openSection "leaderboard"}} @locked={{this.controller.isLocked}} />
+            <DwpSectionCard @label="Topics" @desc="Trending discussions with engagement data" @icon="topics" @colorClass="dwp-card--settings" @enabled={{this.isEnabled "topics" "topics_enabled"}} @onClick={{fn this.controller.openSection "topics"}} @locked={{this.controller.isLocked}} />
+            <DwpSectionCard @label="FAQ" @desc="Accordion Q&A with optional image" @icon="faq" @colorClass="dwp-card--support" @enabled={{this.isEnabled "faq" "faq_enabled"}} @onClick={{fn this.controller.openSection "faq"}} @locked={{this.controller.isLocked}} />
+            <DwpSectionCard @label="App CTA" @desc="App download badges and gradient background" @icon="appcta" @colorClass="dwp-card--admin" @enabled={{this.isEnabled "app_cta" "show_app_ctas"}} @onClick={{fn this.controller.openSection "app_cta"}} @locked={{this.controller.isLocked}} />
           </div>
         {{/if}}
       </:content>

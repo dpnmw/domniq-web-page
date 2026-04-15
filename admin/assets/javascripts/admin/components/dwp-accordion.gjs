@@ -4,6 +4,7 @@ import { action } from "@ember/object";
 import { on } from "@ember/modifier";
 import { htmlSafe } from "@ember/template";
 import { getIcon } from "./dwp-icons";
+import DwpLicenseLock from "./dwp-license-lock";
 
 export default class DwpAccordion extends Component {
   @tracked isOpen = this.args.open ?? false;
@@ -30,12 +31,22 @@ export default class DwpAccordion extends Component {
             <span class="dwp-accordion__icon">{{this.iconHtml}}</span>
           {{/if}}
           {{@title}}
+          {{#if @locked}}
+            <span class="dwp-accordion__lock-badge">Licence Required</span>
+          {{/if}}
         </span>
         <span class="dwp-accordion__toggle">{{this.toggleHtml}}</span>
       </button>
       {{#if this.isOpen}}
         <div class="dwp-accordion__body {{if @dimmed 'dwp-accordion__body--dimmed'}}">
-          {{yield}}
+          {{#if @locked}}
+            <div class="dwp-accordion__body-locked">
+              {{yield}}
+              <DwpLicenseLock />
+            </div>
+          {{else}}
+            {{yield}}
+          {{/if}}
         </div>
       {{/if}}
     </div>
