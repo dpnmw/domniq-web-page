@@ -4,11 +4,9 @@ module DomniqWebPage
   class AdminConfigsController < ::Admin::AdminController
     requires_plugin DomniqWebPage::PLUGIN_NAME
 
-    ALLOWED_TYPES = DomniqWebPage::Config::VALID_TYPES.freeze
-
     def show
       type = params[:config_type]
-      raise Discourse::NotFound unless ALLOWED_TYPES.include?(type)
+      raise Discourse::NotFound unless allowed_types.include?(type)
 
       configs = Config.for_type(type).order(:config_key)
       render json: { configs: serialize(configs) }
@@ -16,7 +14,7 @@ module DomniqWebPage
 
     def bulk_update
       type = params[:config_type]
-      raise Discourse::NotFound unless ALLOWED_TYPES.include?(type)
+      raise Discourse::NotFound unless allowed_types.include?(type)
 
       errors = []
       (params[:configs] || {}).each do |key, value|
@@ -34,6 +32,10 @@ module DomniqWebPage
     end
 
     private
+
+    def allowed_types
+      DomniqWebPage::Config::VALID_TYPES
+    end
 
     def serialize(configs)
       configs.map { |c|
