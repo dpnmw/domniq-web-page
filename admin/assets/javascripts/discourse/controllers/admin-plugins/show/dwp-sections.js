@@ -47,7 +47,7 @@ export default class DwpSectionsController extends Controller {
     this.saved = false;
   }
 
-  static LOCKED_SECTIONS = ["stats", "about", "leaderboard", "topics", "faq", "app_cta"];
+  static LOCKED_SECTIONS = ["about", "leaderboard", "topics", "faq", "app_cta"];
 
   isSectionLocked(section) {
     return this.isLocked && DwpSectionsController.LOCKED_SECTIONS.includes(section);

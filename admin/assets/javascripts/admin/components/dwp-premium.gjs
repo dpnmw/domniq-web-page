@@ -188,29 +188,13 @@ export default class DwpPremium extends Component {
           <div class="dwp-premium-pricing__glow"></div>
           <div class="dwp-premium-pricing__content">
             <div class="dwp-premium-pricing__header">
-              <h2 class="dwp-premium-pricing__title">Unlock the Full Experience</h2>
-              <p class="dwp-premium-pricing__subtitle">Transform your Discourse into a stunning, branded destination — works beautifully on desktop and mobile browsers with full PWA support.</p>
+              <h2 class="dwp-premium-pricing__title">Premium Landing Page</h2>
+              <p class="dwp-premium-pricing__subtitle">Create a branded welcome page for campaigns, promotions, and onboarding — designed to engage unauthenticated visitors and convert them into community members.</p>
             </div>
 
-            <div class="dwp-premium-pricing__platforms">
-              <div class="dwp-premium-pricing__platform">
-                <div class="dwp-premium-pricing__platform-icon dwp-premium-pricing__platform-icon--desktop">
-                  <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="white" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-                </div>
-                <span>Desktop</span>
-              </div>
-              <div class="dwp-premium-pricing__platform">
-                <div class="dwp-premium-pricing__platform-icon dwp-premium-pricing__platform-icon--mobile">
-                  <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="white" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
-                </div>
-                <span>Mobile</span>
-              </div>
-              <div class="dwp-premium-pricing__platform">
-                <div class="dwp-premium-pricing__platform-icon dwp-premium-pricing__platform-icon--pwa">
-                  <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="white" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                </div>
-                <span>PWA</span>
-              </div>
+            <div class="dwp-premium-pricing__badges">
+              <span class="dwp-premium-pricing__badge dwp-premium-pricing__badge--responsive">Fully Responsive</span>
+              <span class="dwp-premium-pricing__badge dwp-premium-pricing__badge--theme">Dark &amp; Light Mode</span>
             </div>
 
             <div class="dwp-premium-pricing__price">
@@ -223,7 +207,7 @@ export default class DwpPremium extends Component {
               <div class="dwp-premium-pricing__feature-col">
                 <div class="dwp-premium-pricing__feature">
                   <span class="dwp-premium-pricing__check dwp-premium-pricing__check--blue">&#10003;</span>
-                  <span>5 extra landing page sections — About, Leaderboard, Topics, FAQ &amp; App CTA</span>
+                  <span>5 extra sections — About, Leaderboard, Topics, FAQ &amp; App CTA</span>
                 </div>
                 <div class="dwp-premium-pricing__feature">
                   <span class="dwp-premium-pricing__check dwp-premium-pricing__check--teal">&#10003;</span>
@@ -235,7 +219,7 @@ export default class DwpPremium extends Component {
                 </div>
                 <div class="dwp-premium-pricing__feature">
                   <span class="dwp-premium-pricing__check dwp-premium-pricing__check--orange">&#10003;</span>
-                  <span>Custom preloader with brand colors</span>
+                  <span>Branded preloader with custom colors</span>
                 </div>
               </div>
               <div class="dwp-premium-pricing__feature-col">
@@ -260,7 +244,7 @@ export default class DwpPremium extends Component {
 
             <div class="dwp-premium-pricing__free-note">
               <span class="dwp-premium-pricing__free-badge">Free Forever</span>
-              <span>Core features — hero section, navbar, footer, design basics &amp; PWA access — are free to use with no limits.</span>
+              <span>Core landing page with hero, stats, navbar, footer &amp; design basics — always free, no limits.</span>
             </div>
 
             <a href="https://api.dpnmediaworks.com/pay/discourse/domniq-web-page" target="_blank" rel="noopener noreferrer" class="dwp-premium-pricing__cta">
