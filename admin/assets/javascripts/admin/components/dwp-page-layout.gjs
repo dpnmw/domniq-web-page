@@ -1,8 +1,7 @@
 import Component from "@glimmer/component";
 import DPageSubheader from "discourse/components/d-page-subheader";
 import { i18n } from "discourse-i18n";
-
-const APP_VERSION = "2.0.0";
+import APP_VERSION from "./dwp-version";
 
 export default class DwpPageLayout extends Component {
   get currentYear() {

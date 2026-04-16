@@ -9,6 +9,7 @@ import { popupAjaxError } from "discourse/lib/ajax-error";
 import DwpPageLayout from "./dwp-page-layout";
 import DwpRow from "./dwp-row";
 import { getIcon } from "./dwp-icons";
+import APP_VERSION from "./dwp-version";
 
 export default class DwpPremium extends Component {
   @service toasts;
@@ -222,7 +223,7 @@ export default class DwpPremium extends Component {
               <div class="dwp-premium-pricing__feature-col">
                 <div class="dwp-premium-pricing__feature">
                   <span class="dwp-premium-pricing__check dwp-premium-pricing__check--blue">&#10003;</span>
-                  <span>6 extra landing page sections — Stats, About, Leaderboard, Topics, FAQ &amp; App CTA</span>
+                  <span>5 extra landing page sections — About, Leaderboard, Topics, FAQ &amp; App CTA</span>
                 </div>
                 <div class="dwp-premium-pricing__feature">
                   <span class="dwp-premium-pricing__check dwp-premium-pricing__check--teal">&#10003;</span>
@@ -307,7 +308,7 @@ export default class DwpPremium extends Component {
         <div class="dwp-card dwp-card--support">
           <div class="dwp-card__body">
             <h3 class="dwp-card__heading"><span class="dwp-card__heading-icon">{{this.iconHtml "about"}}</span>Plugin Info</h3>
-            <DwpRow @title="Version"><span>2.0.0</span></DwpRow>
+            <DwpRow @title="Version"><span>{{APP_VERSION}}</span></DwpRow>
             <DwpRow @title="Identifier"><span>domniq-web-page</span></DwpRow>
             <DwpRow @title="Safe Mode URL"><code>{{this.safeModeUrl}}</code></DwpRow>
           </div>

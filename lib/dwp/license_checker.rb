@@ -91,7 +91,7 @@ module DomniqWebPage
     end
 
     # Locked config types — sections behind the license
-    LOCKED_SECTION_TYPES = %w[stats about leaderboard topics faq app_cta].freeze
+    LOCKED_SECTION_TYPES = %w[about leaderboard topics faq app_cta].freeze
     LOCKED_ACCORDION_KEYS = {
       "hero" => %w[
         hero_bg_effect hero_background_overlay hero_overlay_color hero_overlay_opacity
