@@ -36,10 +36,9 @@ module DomniqWebPage
           next
         end
 
-        # Reject individual locked keys within partially locked types
+        # Skip individual locked keys within partially locked types
         if defined?(DomniqWebPage::LicenseChecker) &&
            DomniqWebPage::LicenseChecker.config_locked?(type, key_str)
-          errors << "#{key_str}: requires a valid licence"
           next
         end
 
