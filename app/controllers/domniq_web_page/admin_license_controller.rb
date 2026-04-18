@@ -43,6 +43,7 @@ module DomniqWebPage
         email: result["email"],
         paid_at: result["paid_at"],
         expires_at: result["expires_at"],
+        tier: result["tier"],
         last_checked: result["checked_at"],
         license_key: DomniqWebPage::LicenseChecker.license_key_masked,
       }

@@ -84,6 +84,11 @@ module DomniqWebPage
       cached&.dig("expires_at")
     end
 
+    def self.tier
+      cached = read_cache
+      cached&.dig("tier")
+    end
+
     def self.current_domain
       URI.parse(Discourse.base_url).host
     rescue StandardError
@@ -171,6 +176,7 @@ module DomniqWebPage
         "email" => data["email"],
         "paid_at" => data["paid_at"],
         "expires_at" => data["expires_at"],
+        "tier" => data["tier"],
         "error" => data["error"],
         "checked_at" => Time.now.iso8601,
       }

@@ -89,6 +89,20 @@ export default class DwpPremium extends Component {
     return this.license?.licensed === true;
   }
 
+  get isTrial() {
+    return this.isLicensed && this.license?.tier === "trial";
+  }
+
+  get tierLabel() {
+    if (!this.license?.tier) return null;
+    return this.license.tier === "trial" ? "Trial" : "Premium";
+  }
+
+  get tierClass() {
+    if (!this.license?.tier) return "";
+    return this.license.tier === "trial" ? "dwp-support__tier--trial" : "dwp-support__tier--premium";
+  }
+
   get statusLabel() {
     if (!this.license) return "Loading...";
     if (this.license.licensed) return "Active";
@@ -98,6 +112,10 @@ export default class DwpPremium extends Component {
   get statusClass() {
     if (!this.license) return "";
     return this.license.licensed ? "dwp-support__status--active" : "dwp-support__status--inactive";
+  }
+
+  get orderUrl() {
+    return "https://api.dpnmediaworks.com/pay/discourse/domniq-web-page";
   }
 
   get safeModeUrl() {
@@ -141,6 +159,11 @@ export default class DwpPremium extends Component {
             </DwpRow>
 
             {{#if this.isLicensed}}
+              {{#if this.tierLabel}}
+                <DwpRow @title="Tier" @desc="Your licence plan">
+                  <span class="dwp-support__tier {{this.tierClass}}">{{this.tierLabel}}</span>
+                </DwpRow>
+              {{/if}}
               {{#if this.license.license_key}}
                 <DwpRow @title="Licence Key" @desc="Your activated licence key">
                   <span class="dwp-support__key-display">{{this.license.license_key}}</span>
@@ -175,7 +198,11 @@ export default class DwpPremium extends Component {
                 <button type="button" class="btn btn-primary btn-small" disabled={{this.activating}} {{on "click" this.activateLicense}}>
                   {{if this.activating "Activating..." "Activate Licence"}}
                 </button>
+                <a href="{{this.orderUrl}}" target="_blank" rel="noopener noreferrer" class="btn btn-default btn-small">Order Licence</a>
               {{/unless}}
+              {{#if this.isTrial}}
+                <a href="{{this.orderUrl}}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-small">Upgrade Licence</a>
+              {{/if}}
               <button type="button" class="btn btn-default btn-small" disabled={{this.checking}} {{on "click" this.checkLicense}}>
                 {{if this.checking "Checking..." "Check Licence"}}
               </button>

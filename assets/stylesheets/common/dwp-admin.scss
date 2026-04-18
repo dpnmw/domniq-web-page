@@ -1315,6 +1315,26 @@
   color: var(--primary-medium);
 }
 
+.dwp-support__tier {
+  display: inline-flex;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+
+  &--trial {
+    background: rgba(245, 158, 11, 0.12);
+    color: #f59e0b;
+  }
+
+  &--premium {
+    background: rgba(99, 102, 241, 0.12);
+    color: #818cf8;
+  }
+}
+
 .dwp-support__links {
   display: flex;
   flex-direction: column;
